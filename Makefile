@@ -16,7 +16,7 @@ TARGET = -Vgcc_ntox86_64
 
 CFLAGS += $(DEBUG) $(TARGET) -Wall -lcrypto
 LDFLAGS+= $(DEBUG) $(TARGET)
-BINS = hash
+BINS = sign_rsa hash
 all: $(BINS)
 
 clean:
