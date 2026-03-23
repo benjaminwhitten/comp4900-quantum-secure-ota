@@ -6,10 +6,11 @@
 
 /**
  * Signs a sha256 hash with RSA private key.
- * IN:  SHA256 hash to sign.
- * OUT: RSA signature of the hash.
+ * IN: pemfile - The .pem file containing the private key.
+ * IN: hsh - SHA256 hash to sign.
+ * OUT: sig - RSA signature of the hash.
  */
-unsigned int signRSA(unsigned char* hsh, unsigned char** sig){
+unsigned int signRSA(char* pemfile, unsigned char* hsh, unsigned char** sig){
 	// Variables.
 	EVP_PKEY* skey;
 	FILE *fptr;
@@ -17,7 +18,7 @@ unsigned int signRSA(unsigned char* hsh, unsigned char** sig){
 	EVP_MD_CTX* ctx;
 
 	// Reading key from PEM file.
-	fptr = fopen("rsakeypair.pem", "r");
+	fptr = fopen(pemfile, "r");
 	if (fptr) {
 		skey = EVP_PKEY_new();
 		PEM_read_PrivateKey(fptr, &skey, NULL, NULL);
@@ -33,19 +34,24 @@ unsigned int signRSA(unsigned char* hsh, unsigned char** sig){
 	return 0;
 }
 
-// Main function for testing.
+/**
+ * Main function.
+ * IN: The .pem file (argv[1]).
+ * IN: SHA256 hash (argv[2]).
+ * Signs using the private key and prints it to console.
+ */
 int main(int argc, char **argv) {
 	unsigned char* sig = NULL;
 
-	if (argc > 1 && signRSA((unsigned char*) argv[1], &sig)) {
+	if (argc > 2 && signRSA(argv[1], (unsigned char*) argv[2], &sig)) {
 		// Printing in hex.
 		for(int i = 0; i < 256; i++) {
 			printf("%02x", sig[i]);
 		}
 		printf("\n");
 		free(sig);
-	} else if (argc <= 1) {
-		printf("ERROR: No hash provided.\n");
+	} else if (argc <= 2) {
+		printf("ERROR: Missing one or more arguments (.pem file, hash).\n");
 	} else {
 		printf("ERROR: Could not generate signature.\n");
 	}

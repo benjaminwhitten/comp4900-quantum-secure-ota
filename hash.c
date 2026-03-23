@@ -4,9 +4,8 @@
 
 /**
  * Returns the SHA256 Hash of a file.
- * IN:  filename (including extension).
- * OUT: SHA256 Hash as unsigned char* or NULL if no file was found.
- *      Must be manually freed.
+ * IN:  filename - The file to hash (including extension).
+ * OUT: fhash - The SHA256 Hash as an unsigned char*.
  */
 unsigned int hash(char* filename, unsigned char** fhash){
 	// Variables.
@@ -36,7 +35,11 @@ unsigned int hash(char* filename, unsigned char** fhash){
 	return 0;
 }
 
-// Main function for testing.
+/**
+ * Main function.
+ * IN: Filename (argv).
+ * Computes the SHA256 hash of the file and prints it to console.
+ */
 int main(int argc, char **argv) {
 	unsigned char* fhash = NULL;
 
