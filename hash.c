@@ -4,16 +4,14 @@
 
 /**
  * Returns the SHA256 Hash of a file.
- * IN:  filename (including extension).
- * OUT: SHA256 Hash as unsigned char* or NULL if no file was found.
- *      Must be manually freed.
+ * IN:  filename - The file to hash (including extension).
+ * OUT: fhash - The SHA256 Hash as an unsigned char*.
  */
-unsigned char* hash(char* filename){
+unsigned int hash(char* filename, unsigned char** fhash){
 	// Variables.
 	FILE *fptr;
 	char *fcontent = NULL;
 	unsigned int fsize;
-	unsigned char *fhash = NULL;
 
 	fptr = fopen(filename, "r");
 	if (fptr) {
@@ -28,24 +26,33 @@ unsigned char* hash(char* filename){
 		fclose(fptr);
 
 		// Computing hash.
-		fhash = (unsigned char *)malloc(SHA256_DIGEST_LENGTH);
-		SHA256((unsigned char *)fcontent, fsize, fhash);
+		*fhash = (unsigned char *)malloc(SHA256_DIGEST_LENGTH);
+		SHA256((unsigned char *)fcontent, fsize, *fhash);
 
 		free(fcontent);
+		return 1;
 	}
-
-	return fhash;
+	return 0;
 }
 
-// Main function for testing.
+/**
+ * Main function.
+ * IN: Filename (argv).
+ * Computes the SHA256 hash of the file and prints it to console.
+ */
 int main(int argc, char **argv) {
-	unsigned char* fhash;
+	unsigned char* fhash = NULL;
 
-	fhash = hash("/tmp/test.txt");
-
-	if (fhash) {
-		printf("%s", fhash);
+	if (argc > 1 && hash(argv[1], &fhash)) {
+		// Printing in hex.
+		for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+			printf("%02x", fhash[i]);
+		}
 		free(fhash);
+	} else if (argc <= 1) {
+		printf("ERROR: No filename provided.\n");
+	} else {
+		printf("ERROR: Failed to hash file.\n");
 	}
 
 	return EXIT_SUCCESS;
