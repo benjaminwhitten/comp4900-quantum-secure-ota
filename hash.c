@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 	} else if (argc <= 1) {
 		printf("ERROR: No filename provided.\n");
 	} else {
-		printf("Error: Failed to hash file.\n");
+		printf("ERROR: Failed to hash file.\n");
 	}
 
 	return EXIT_SUCCESS;
