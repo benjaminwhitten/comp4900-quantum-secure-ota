@@ -48,7 +48,6 @@ int main(int argc, char **argv) {
 		for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
 			printf("%02x", fhash[i]);
 		}
-		printf("\n");
 		free(fhash);
 	} else if (argc <= 1) {
 		printf("ERROR: No filename provided.\n");

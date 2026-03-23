@@ -20,8 +20,7 @@ unsigned int signRSA(char* pemfile, unsigned char* hsh, unsigned char** sig){
 	// Reading key from PEM file.
 	fptr = fopen(pemfile, "r");
 	if (fptr) {
-		skey = EVP_PKEY_new();
-		PEM_read_PrivateKey(fptr, &skey, NULL, NULL);
+		skey = PEM_read_PrivateKey(fptr, NULL, NULL, NULL);
 		fclose(fptr);
 
 		// Generating signature.
@@ -29,6 +28,12 @@ unsigned int signRSA(char* pemfile, unsigned char* hsh, unsigned char** sig){
 		EVP_DigestSignInit(ctx, NULL, NULL, NULL, skey);
 		*sig = (unsigned char *)malloc(siglen);
 		EVP_DigestSign(ctx, *sig, &siglen, hsh, SHA256_DIGEST_LENGTH);
+
+		// Writing to file.
+		fptr = fopen("rsa_sig.bin", "wb");
+		fwrite(sig, 1, siglen, fptr);
+		fclose(fptr);
+
 		return 1;
 	}
 	return 0;
@@ -48,7 +53,6 @@ int main(int argc, char **argv) {
 		for(int i = 0; i < 256; i++) {
 			printf("%02x", sig[i]);
 		}
-		printf("\n");
 		free(sig);
 	} else if (argc <= 2) {
 		printf("ERROR: Missing one or more arguments (.pem file, hash).\n");
