@@ -7,7 +7,7 @@
  * IN:  filename - The file to hash (including extension).
  * OUT: fhash - The SHA256 Hash as an unsigned char*.
  */
-unsigned int hash(char* filename, unsigned char** fhash){
+unsigned int hash(const char* filename, unsigned char** fhash){
 	// Variables.
 	FILE *fptr;
 	char *fcontent = NULL;
