@@ -11,7 +11,7 @@
  * IN: sigFile - The .bin file containing the signature.
  * Returns 1 if valid, 0 otherwise.
  */
-unsigned int validateRSA(char* pemFile, unsigned char* hsh, char* sigFile){
+unsigned int validateRSA(const char* pemFile, const unsigned char* hsh, const char* sigFile){
 	// Variables.
 	EVP_PKEY* pkey;
 	FILE *fptr;
