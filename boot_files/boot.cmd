@@ -2,18 +2,14 @@ echo "Image to boot: ${image}"
 
 fdt addr -c
 
-# Load the device tree first
-if load mmc 0:1 0x03000000 bcm2711-rpi-4-b.dtb; then
-    echo "Device tree bcm2711-rpi-4-b.dtb loaded successfully"
-else
-    echo "Failed to load device tree "
-fi
+# Load the fdt first
+setenv fdt_addr ${fdtcontroladdr}
 
 # Load the image into memory
 if load mmc 0:1 0x00080000 ${image}; then
     echo "Loaded ${image} into memory"
     sleep 5
-    go 0x00080000 0x03000000
+    go 0x00080000 ${fdt_addr}
 
 # If it could not be loaded try to load a backup
 else
@@ -25,7 +21,7 @@ else
         if load mmc 0:1 0x00080000 ifs-rpi4.bin.bak; then
             echo "DEBUG: Successfully loaded backup image ifs-rpi4.bin.bak"
             sleep 5
-            go 0x00080000 0x03000000
+            go 0x00080000 ${fdt_addr}
 
         # Indicate that no image could be loaded
         else

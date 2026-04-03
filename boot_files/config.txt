@@ -6,4 +6,5 @@ disable_commandline_tags=1
 force_turbo=1
 gpu_mem=16
 max_framebuffers=2
+dtparam=sd_poll_once
 kernel=u-boot.bin
