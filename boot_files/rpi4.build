@@ -8,7 +8,7 @@
 [+keeplinked]
 [image=0x80000]
 [virtual=aarch64le,raw -compress] boot = {
-    startup-bcm2711-rpi4 -v -D miniuart -W 2500 -u arg -r 0,4096,1 
+	startup-bcm2711-rpi4 -v -D miniuart -W 2500 -u arg -t "below1G:0x11000000:0x20000000"
     PATH=/proc/boot:/sbin:/bin:/usr/bin:/usr/sbin:/usr/libexec LD_LIBRARY_PATH=/proc/boot:/lib:/usr/lib:/lib/dll:/lib/dll/pci procnto-smp-instr -v
 }
 
@@ -84,12 +84,12 @@
     ## Note: "bmstr_base" option is required for busmaster memory
     ## address translation
     #######################################################################
-    display_msg "Starting SDMMC driver (/dev/sd0)"
-    devb-sdmmc-bcm2711 mem name=below1G sdio addr=0xfe340000,irq=158 disk name=sd
-    waitfor /dev/sd0
-	mount -t dos /dev/sd0t12 /fs/sd
-
-
+    display_msg "Starting SDMMC driver (/dev/hd0)"
+	devb-sdmmc-bcm2711 cam pnp mem name=below1G sdio addr=0xfe340000,irq=158 dos exe=all
+	waitfor /dev/hd0 10
+	mount -e /dev/hd0
+	waitfor /dev/hd0t12 10
+	mount -t dos /dev/hd0t12 /fs/sd
 
     #######################################################################
     ## USB OTG Host Controller driver
@@ -107,7 +107,7 @@
     ## Network driver
     ############################################################################################
     display_msg "Starting networking ..."
-    io-sock -m phy -m fdt -m phy_fdt -d genet -m pci -d em -d ix -d re -d igc -m usb -d axe -d axge -d cdce -d smsc 
+    io-sock -m phy -m fdt -m phy_fdt -d genet -m pci -d em -d ix -d re -d igc -m usb -d axe -d axge -d cdce -d smsc
 
 
     ############################################################################################
@@ -147,9 +147,11 @@
     [+session] ksh &
 }
 
+[type=file] fdt.dtb = bcm2711-rpi-4-b.dtb
 
 [uid=0 gid=0]
-
+[type=dir] /fs
+[type=dir] /fs/sd
 [type=link] /bin/sh=/bin/ksh
 [type=link] /tmp=/dev/shmem
 [type=link] /dev/console=/dev/ser1
@@ -826,4 +828,5 @@ usb_start.sh = {
 #esac
 #}
 
-/boot/bcm2711-rpi-4-b.dtb=bcm2711-rpi-4-b.dtb
+[perms=0644]
+/boot/bcm2711-rpi-4-b.dtb = bcm2711-rpi-4-b.dtb
