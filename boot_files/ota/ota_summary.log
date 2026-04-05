@@ -1,0 +1,11 @@
+========================================
+Script version   : rsa-validated-ota-v1
+Validation       : FAILED
+OTA start_epoch  : 32
+OTA end_epoch    : 33
+Verify time      : 1 seconds
+OTA time         : 1 seconds
+New image        : /fs/boot/new-ifs.bin
+Signature file   : /fs/boot/new-ifs.bin.sig
+Current image    : /fs/boot/ifs-rpi4.bin
+========================================

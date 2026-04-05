@@ -1,0 +1,1501 @@
+========================================
+OTA start: Thu Jan  1 00:03:30 GMT 1970
+New image : /fs/boot/test-ifs.bin
+Current   : /fs/boot/ifs-rpi4.bin
+Backup    : /fs/boot/ota/ifs-rpi4.bin.bak
+--- BEFORE ---
+[vmstat]
+         Type InUse MemUse Requests  Size(s)
+  ether_multi     8     1K        8  16,32,128
+       ifaddr    35    12K       35  16,32,64,256,384,2048,4096
+        ifnet     6    11K        6  128,2048
+        clone    17     5K       17  256
+        ipsec     3     1K        3  256
+      lltable    16     4K       16  256
+       pfsync     2     5K        2  384,4096
+          tun     3     1K        3  32
+         igmp     5     1K        5  128
+    in6_multi     9     1K        9  32,256
+     in_multi     1     1K        1  256
+          BPF     5     1K        5  128
+encap_export_host    18     1K       18  32,64
+    mroutetbl     4    27K        4  256,2048,8192,16384
+  inpcbpolicy    16     1K       59  32
+         kenv     1     8K        1  8192
+        hhook    15     3K       17  16,32,256
+      ithread    18     3K       18  32,128,256
+       prison     4     1K       12  64
+       linker    96    10K      224  16,32,64,384
+         temp    23     1K      175  16,64,256,512,1024,2048,65536
+       devbuf   114    72K      126  16,32,64,128,65536
+       module   114    15K      114  128
+     mtx_pool     2    72K        2  8192,65536
+          osd     1     1K        1  16
+         cred    22     9K       67  384
+    sysctloid 10817   637K    10831  16,32,64,128
+      callout     4  1024K        4  
+    ipsec-saq     2     2K        2  1024
+  ipsecpolicy     2     2K        2  256,1024
+       sahead     1     1K        1  1024
+     secasvar     1     1K        1  1024
+          mld     3     1K        3  128
+       ip6ndp     4     1K        4  64,256
+        nhops     6     1K        6  128
+      pf_hash     7 11528K        7  2048
+     pf_ifnet    11     5K       17  256,2048
+         pfil     5     1K        5  128
+       busdma   514   289K      514  128,1024
+   QNX_device    11     4K       11  16,256,512
+        epoch     5    17K        5  256,4096
+       resmgr    74    66K       74  128,2048,4096
+     nexusdev     7     1K        7  16,64
+     routetbl    23     8K       57  16,32,64,128,256,384,512,1024,2048
+    sctp_iter     0     0K        1  256
+     sctp_ifn     1     1K        4  128
+     sctp_ifa     3     1K        4  128
+     sctp_vrf     1     1K        1  64
+    sctp_a_it     0     0K        1  16
+       bus-sc    11    81K     7618  16,64,128,1024,2048,16384,65536
+          bus   492    54K     8104  16,32,64,128,256
+chacha20random     1     1K        1  1024
+ eventhandler    77     7K       77  64,128
+   gtaskqueue    30    28K       30  16,32,384,8192
+         kobj    59   236K       67  4096
+       crypto     2     1K        2  64,256
+      Per-cpu     1     1K        1  32
+         rman    13     2K       13  32,128
+         sbuf     1     1K       15  16,32,64,128,256
+    taskqueue    25     4K       25  16,32,384
+       Unitno    21     2K       29  32,64
+    hostcache     1    32K        1  32768
+      tcpfunc     1     1K        1  64
+     syncache     1    68K        1  
+          pcb    21   201K       21  16,32,64,128,1024,2048,8192,16384
+       soname     2     1K        8  16,32
+      soidstr     2     1K        2  32
+       vnodes     2     2K        2  1024
+          UMA    88     2K       88  16,32
+vnet_data_free     1     1K        1  32
+    vnet_data     1   192K        1  
+         vnet     1     1K        1  128
+     openfirm   509    14K      799  16,32,64,128,256
+       syscon     1     1K        1  64
+       USBdev     1     1K        1  32
+          USB     5     2K        9  16,32,64,384,1024
+[pidin mem]
+     pid tid name                         prio STATE                      code  data        stack
+       1   1 /proc/boot/procnto-smp-instr   0f RUNNING                    631K  214K    124K/584K
+       1   2 /proc/boot/procnto-smp-instr   0f RUNNING                    631K  214K    124K/584K
+       1   3 /proc/boot/procnto-smp-instr   0f READY                      631K  214K    124K/584K
+       1   4 /proc/boot/procnto-smp-instr   0f RUNNING                    631K  214K    124K/584K
+       1   5 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   6 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   7 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   8 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   9 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  10 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  11 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  12 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  13 /proc/boot/procnto-smp-instr   1f NANOSLEEP                  631K  214K       0/584K
+       1  15 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  16 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  17 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  19 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  20 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  21 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  22 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  23 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  24 /proc/boot/procnto-smp-instr  10r RUNNING                    631K  214K    8192/584K
+       1  25 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  26 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+             procnto-smp-instr             @ffffff8060032000                 631K  214K
+       2   1 sbin/pipe                     10r SIGWAITINFO               1020K  556K    512K/560K
+       2   2 sbin/pipe                     10r RECEIVE                   1020K  556K     12K/560K
+       2   4 sbin/pipe                     10r RECEIVE                   1020K  556K     12K/560K
+       2   5 sbin/pipe                     10r RECEIVE                   1020K  556K     12K/560K
+       2   7 sbin/pipe                     10r RECEIVE                   1020K  556K     12K/560K
+             pipe                          @29aeacf000                  24K  8192
+             ldqnx-64.so.2                 @5b1e835000                 228K   12K
+             libsecpol.so.1                @5b1e872000                  20K  4096
+             libc.so.6                     @5b1e879000                 672K  8192
+             libgcc_s.so.1                 @5b1e92d000                  76K  4096
+             **heap**                      @49c66af000 (       0)            468K
+             **zero ELF**                  @5b1e871000 (       0)            4096
+             **zero ELF**                  @5b1e877000 (       0)            4096
+             **zero ELF**                  @5b1e921000 (       0)             16K
+             **zero ELF**                  @5b1e927000 (       0)             24K
+             **zero ELF**                  @5b1e940000 (       0)            4096
+   20483   1 bin/slogger2                  10r RECEIVE                   1080K  608K    512K/512K
+             slogger2                      @3ffc61e000                  64K  8192
+             ldqnx-64.so.2                 @152af91000                 228K   12K
+             libslog2.so.1                 @152afce000                  20K  4096
+             libsecpol.so.1                @152afd5000                  20K  4096
+             libc.so.6                     @152afdc000                 672K  8192
+             libgcc_s.so.1                 @152b090000                  76K  4096
+             **zero ELF**                  @152afcd000 (       0)            4096
+             **zero ELF**                  @152afd3000 (       0)            4096
+             **zero ELF**                  @152afda000 (       0)            4096
+             **zero ELF**                  @152b084000 (       0)             16K
+             **zero ELF**                  @152b08a000 (       0)             24K
+             **zero ELF**                  @152b0a3000 (       0)            4096
+             /shmem/slogger2/console.20483 @246010e000 (       0)             20K
+             /shmem/slogger2/wdtkick.20487 @2460113000 (       0)             68K
+             em/slogger2/i2c_bcm2711.20488 @2460124000 (       0)             68K
+             ogger2/devc_serminiuart.20490 @2460135000 (       0)             68K
+             ger2/devb_sdmmc_bcm2711.20492 @2460146000 (       0)             68K
+             mem/slogger2/io_usb_otg.73742 @2460157000 (       0)             68K
+             /shmem/slogger2/dhcpcd.139280 @2460168000 (       0)             68K
+             **heap**                      @4a9f6d7000 (       0)             84K
+   20484   1 usr/sbin/dumper               10r RECEIVE                   1156K  260K     96K/192K
+   20484   2 usr/sbin/dumper               10r RECEIVE                   1156K  260K     96K/192K
+             dumper                        @12ea15b000                  40K  8192
+             ldqnx-64.so.2                 @35d0a1a000                 228K   12K
+             libsecpol.so.1                @35d0a57000                  20K  4096
+             libslog2.so.1                 @35d0a5e000                  20K  4096
+             libz.so.2                     @35d0a65000                 100K  4096
+             libc.so.6                     @35d0a80000                 672K  8192
+             libgcc_s.so.1                 @35d0b34000                  76K  4096
+             **zero ELF**                  @12ea167000 (       0)             64K
+             **zero ELF**                  @35d0a56000 (       0)            4096
+             **zero ELF**                  @35d0a5c000 (       0)            4096
+             **zero ELF**                  @35d0a63000 (       0)            4096
+             **zero ELF**                  @35d0a7e000 (       0)            4096
+             **zero ELF**                  @35d0b28000 (       0)             16K
+             **zero ELF**                  @35d0b2e000 (       0)             24K
+             **zero ELF**                  @35d0b47000 (       0)            4096
+             v/shmem/slogger2/dumper.20484 @47f9c81000 (       0)            8192
+             **heap**                      @5490a82000 (       0)             84K
+   20485   1 sbin/mqueue                   10r RECEIVE                   1008K  172K      32K/32K
+             mqueue                        @499c2bc000                  12K  8192
+             ldqnx-64.so.2                 @21bb78b000                 228K   12K
+             libsecpol.so.1                @21bb7c8000                  20K  4096
+             libc.so.6                     @21bb7cf000                 672K  8192
+             libgcc_s.so.1                 @21bb883000                  76K  4096
+             **zero ELF**                  @21bb7c7000 (       0)            4096
+             **zero ELF**                  @21bb7cd000 (       0)            4096
+             **zero ELF**                  @21bb877000 (       0)             16K
+             **zero ELF**                  @21bb87d000 (       0)             24K
+             **zero ELF**                  @21bb896000 (       0)            4096
+             **heap**                      @50e36d9000 (       0)             84K
+   20486   1 usr/sbin/random               10r SIGWAITINFO               5324K  932K   512K/1280K
+   20486   2 usr/sbin/random               10r NANOSLEEP                 5324K  932K   256K/1280K
+   20486   3 usr/sbin/random               21r RECEIVE                   5324K  932K   256K/1280K
+   20486   4 usr/sbin/random               10r RECEIVE                   5324K  932K   256K/1280K
+             random                        @52d5d51000                  36K   12K
+             ldqnx-64.so.2                 @39698e9000                 228K   12K
+             libqcrypto.so.1.0             @3969926000                  36K  4096
+             libsecpol.so.1                @3969931000                  20K  4096
+             libqh.so.1                    @3969938000                  72K  4096
+             libc.so.6                     @396994d000                 672K  8192
+             libgcc_s.so.1                 @3969a01000                  76K  4096
+             libslog2.so.1                 @3969a16000                  20K  4096
+             qcrypto-openssl-3.so          @3969a1d000                  64K  4096
+             libcrypto.so.3                @3969a32000                3832K   12K
+             libsocket.so.4                @3969e4b000                 268K  4096
+             v/shmem/slogger2/random.20486 @2128ffc000 (       0)             36K
+             **zero ELF**                  @3969925000 (       0)            4096
+             **zero ELF**                  @396992f000 (       0)            4096
+             **zero ELF**                  @3969936000 (       0)            4096
+             **zero ELF**                  @396994a000 (       0)            8192
+             **zero ELF**                  @39699f5000 (       0)             16K
+             **zero ELF**                  @39699fb000 (       0)             24K
+             **zero ELF**                  @3969a14000 (       0)            4096
+             **zero ELF**                  @3969a1b000 (       0)            4096
+             **zero ELF**                  @3969a2d000 (       0)             16K
+             **zero ELF**                  @3969df0000 (       0)            344K
+             **zero ELF**                  @3969e49000 (       0)            8192
+             **zero ELF**                  @3969e8e000 (       0)            8192
+             **zero ELF**                  @3969e91000 (       0)             24K
+             **heap**                      @409942b000 (       0)            356K
+   20487   1 bin/wdtkick                   10r NANOSLEEP                  992K   92K    512K/512K
+             wdtkick                       @4fd01d4000                  16K  8192
+             ldqnx-64.so.2                 @54251d3000                 228K   12K
+             libc.so.6                     @5425210000                 672K  8192
+             libgcc_s.so.1                 @54252c4000                  76K  4096
+             memory                        @1a65a53000 (fe100000)            4096
+             **heap**                      @253c48c000 (       0)             12K
+             **zero ELF**                  @542520f000 (       0)            4096
+             **zero ELF**                  @54252b8000 (       0)             16K
+             **zero ELF**                  @54252be000 (       0)             24K
+             **zero ELF**                  @54252d7000 (       0)            4096
+   20488   1 sbin/i2c-bcm2711              10r RECEIVE                   1024K  172K    512K/768K
+   20488   2 sbin/i2c-bcm2711              21r INTR                      1024K  172K    256K/768K
+             i2c-bcm2711                   @1016748000                  28K  8192
+             ldqnx-64.so.2                 @3d845fa000                 228K   12K
+             libsecpol.so.1                @3d84637000                  20K  4096
+             libc.so.6                     @3d8463e000                 672K  8192
+             libgcc_s.so.1                 @3d846f2000                  76K  4096
+             **zero ELF**                  @3d84636000 (       0)            4096
+             **zero ELF**                  @3d8463c000 (       0)            4096
+             **zero ELF**                  @3d846e6000 (       0)             16K
+             **zero ELF**                  @3d846ec000 (       0)             24K
+             **zero ELF**                  @3d84705000 (       0)            4096
+             memory                        @40adf06000 (fe804000)            4096
+             **heap**                      @50385fe000 (       0)             84K
+   20489   1 sbin/pci-server               10r RECEIVE                   1484K  448K    256K/768K
+   20489   2 sbin/pci-server               10r RECEIVE                   1484K  448K    256K/768K
+   20489   3 sbin/pci-server               10r RECEIVE                   1484K  448K    256K/768K
+             pci-server                    @3cbc62e000                 152K  8192
+             ldqnx-64.so.2                 @400db7b000                 228K   12K
+             libpci.so.3.0                 @400dbb8000                 136K   16K
+             libsecpol.so.1                @400dbe0000                  20K  4096
+             libc.so.6                     @400dbe7000                 672K  8192
+             libgcc_s.so.1                 @400dc9b000                  76K  4096
+             pci_slog2.so.3.0              @400dcb0000                 8192  4096
+             libslog2.so.1                 @400dcb4000                  20K  4096
+             pci_debug2.so.3.0             @400dcbb000                 4096  4096
+             pci_hw-bcm2711-rpi4.so.3.0    @400dcbe000                  80K  4096
+             pci_cap-0x10.so.3.0           @400dcd8000                  28K  4096
+             _server-buscfg-generic.so.3.0 @400dce1000                  40K  4096
+             pci_cap-0x05.so.3.0           @400dced000                  20K  4096
+             mem/slogger2/pci_server.20489 @1410b7a000 (       0)             68K
+             /dev/shmem/pci/pci_hw         @1410b8b000 (       0)            4096
+             /slogger2/pci_server.20489..0 @1410b8c000 (       0)             68K
+             memory                        @1410b9d000 (fd500000)             40K
+             /dev/shmem/pci/pci_db         @1410ba7000 (       0)            8192
+             /dev/shmem/pci/pci_sync       @1410ba9000 (       0)            4096
+             **zero ELF**                  @400dbb7000 (       0)            4096
+             **zero ELF**                  @400dbda000 (       0)            8192
+             **zero ELF**                  @400dbe5000 (       0)            4096
+             **zero ELF**                  @400dc8f000 (       0)             16K
+             **zero ELF**                  @400dc95000 (       0)             24K
+             **zero ELF**                  @400dcae000 (       0)            4096
+             **zero ELF**                  @400dcb2000 (       0)            4096
+             **zero ELF**                  @400dcb9000 (       0)            4096
+             **zero ELF**                  @400dcbc000 (       0)            4096
+             **zero ELF**                  @400dcd2000 (       0)            4096
+             **zero ELF**                  @400dcd4000 (       0)             16K
+             **zero ELF**                  @400dcdf000 (       0)            4096
+             **zero ELF**                  @400dceb000 (       0)            4096
+             **zero ELF**                  @400dcf2000 (       0)            4096
+             **heap**                      @5fcc5b5000 (       0)             28K
+             **heap**                      @5fcc5bc000 (       0)            4096
+             **heap**                      @5fcc5bd000 (       0)             80K
+   20490   1 sbin/devc-serminiuart         10r RECEIVE                   1060K  172K    512K/512K
+   20490   2 sbin/devc-serminiuart        254i INTR                      1060K  172K       0/512K
+             devc-serminiuart              @229899f000                  64K  8192
+             ldqnx-64.so.2                 @19f6f62000                 228K   12K
+             libsecpol.so.1                @19f6f9f000                  20K  4096
+             libc.so.6                     @19f6fa6000                 672K  8192
+             libgcc_s.so.1                 @19f705a000                  76K  4096
+             **zero ELF**                  @19f6f9e000 (       0)            4096
+             **zero ELF**                  @19f6fa4000 (       0)            4096
+             **zero ELF**                  @19f704e000 (       0)             16K
+             **zero ELF**                  @19f7054000 (       0)             24K
+             **zero ELF**                  @19f706d000 (       0)            4096
+             memory                        @37b7bf4000 (fe215000)            4096
+             **heap**                      @5f37b35000 (       0)             84K
+   20491   1 sbin/spi-bcm2711              10r SIGWAITINFO               1068K  260K   512K/1024K
+   20491   2 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   3 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   4 sbin/spi-bcm2711              10r RECEIVE                   1068K  260K   256K/1024K
+   20491   5 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   6 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   7 sbin/spi-bcm2711              10r RECEIVE                   1068K  260K   256K/1024K
+             spi-bcm2711                   @3c9b2aa000                  52K  8192
+             ldqnx-64.so.2                 @5895efb000                 228K   12K
+             libslog2.so.1                 @5895f38000                  20K  4096
+             libsecpol.so.1                @5895f3f000                  20K  4096
+             libc.so.6                     @5895f46000                 672K  8192
+             libgcc_s.so.1                 @5895ffa000                  76K  4096
+             v/shmem/slogger2/io_spi.20491 @1ae13a4000 (       0)             36K
+             memory                        @1ae13ad000 (fe204000)            4096
+             logger2/bcm2711_dma_lib.20491 @1ae13ae000 (       0)             36K
+             /dev/shmem/bcm2711_dmac_mutex @1ae13b7000 (       0)            4096
+             memory                        @1ae13b8000 (fe007000)            4096
+             memory                        @1ae13b9000 (fe204000)            4096
+             **heap**                      @2c3cba0000 (       0)             20K
+             **heap**                      @2c3cba5000 (       0)            4096
+             **heap**                      @2c3cba6000 (       0)             64K
+             **zero ELF**                  @5895f37000 (       0)            4096
+             **zero ELF**                  @5895f3d000 (       0)            4096
+             **zero ELF**                  @5895f44000 (       0)            4096
+             **zero ELF**                  @5895fee000 (       0)             16K
+             **zero ELF**                  @5895ff4000 (       0)             24K
+             **zero ELF**                  @589600d000 (       0)            4096
+   20492   1 sbin/devb-sdmmc-bcm2711       10r SIGWAITINFO               1656K   45M     64K/372K
+   20492   2 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     32K/372K
+   20492   3 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     32K/372K
+   20492   4 sbin/devb-sdmmc-bcm2711      254i INTR                      1656K   45M       0/372K
+   20492   5 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     16K/372K
+   20492   6 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     20K/372K
+   20492   7 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     24K/372K
+   20492   8 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     24K/372K
+   20492   9 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  10 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  11 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  12 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  13 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  14 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  15 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  16 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+             devb-sdmmc-bcm2711            @2bec800000                 128K  8192
+             ldqnx-64.so.2                 @51b89ac000                 228K   12K
+             libsecpol.so.1                @51b89e9000                  20K  4096
+             libslog2.so.1                 @51b89f0000                  20K  4096
+             libcam.so.2                   @51b89f7000                  96K  4096
+             libc.so.6                     @51b8a11000                 672K  8192
+             libgcc_s.so.1                 @51b8ac5000                  76K  4096
+             io-blk.so                     @51b8ada000                 276K  8192
+             libfsnotify.so.1              @51b8b24000                  40K   12K
+             cam-disk.so                   @51b8b32000                  12K  4096
+             fs-dos.so                     @51b8b37000                  88K  4096
+             2/devb_sdmmc_bcm2711.20492..0 @1600eee000 (       0)             68K
+             memory                        @1600eff000 (fe340000)            4096
+             below1G                       @1600f00000 (       0)            4096
+             below1G                       @1600f01000 (       0)            4096
+             **anonymous**                 @1600f02000 (       0)             43M
+             below1G                       @1603a07000 (       0)            4096
+             **heap**                      @3589cd6000 (       0)           1880K
+             **heap**                      @3589eac000 (       0)             16K
+             **heap**                      @3589eb5000 (       0)            4096
+             **heap**                      @3589ebe000 (       0)            4096
+             **heap**                      @3589ec0000 (    8000)             60K
+             **heap**                      @3589ecf000 (       0)             76K
+             **heap**                      @3589ee3000 (       0)             16K
+             **heap**                      @3589ee8000 (       0)             12K
+             **heap**                      @3589eec000 (       0)             72K
+             **heap**                      @3589f00000 (       0)             60K
+             **heap**                      @3589f10000 (       0)            4096
+             **heap**                      @3589f13000 (       0)             28K
+             **heap**                      @3589f1b000 (       0)             92K
+             **heap**                      @3589f33000 (       0)             64K
+             **zero ELF**                  @51b89e8000 (       0)            4096
+             **zero ELF**                  @51b89ee000 (       0)            4096
+             **zero ELF**                  @51b89f5000 (       0)            4096
+             **zero ELF**                  @51b8a0f000 (       0)            4096
+             **zero ELF**                  @51b8ab9000 (       0)             16K
+             **zero ELF**                  @51b8abf000 (       0)             24K
+             **zero ELF**                  @51b8ad8000 (       0)            4096
+             **zero ELF**                  @51b8b1f000 (       0)            8192
+             **zero ELF**                  @51b8b23000 (       0)            4096
+             **zero ELF**                  @51b8b2e000 (       0)            4096
+             **zero ELF**                  @51b8b35000 (       0)            4096
+             **zero ELF**                  @51b8b4d000 (       0)            4096
+   73742   1 sbin/io-usb-otg               10r SIGWAITINFO               2028K 2192K    512K/992K
+   73742   2 sbin/io-usb-otg               10r CONDVAR                   2028K 2192K     16K/992K
+   73742   3 sbin/io-usb-otg               10r CONDVAR                   2028K 2192K     16K/992K
+   73742   4 sbin/io-usb-otg               10r CONDVAR                   2028K 2192K     16K/992K
+   73742   5 sbin/io-usb-otg               21r RECEIVE                   2028K 2192K     16K/992K
+   73742   6 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742   7 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742   8 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742   9 sbin/io-usb-otg               21r RECEIVE                   2028K 2192K     16K/992K
+   73742  10 sbin/io-usb-otg               24r RECEIVE                   2028K 2192K    256K/992K
+   73742  11 sbin/io-usb-otg               24r RECEIVE                   2028K 2192K     32K/992K
+   73742  12 sbin/io-usb-otg              254i INTR                      2028K 2192K       0/992K
+   73742  13 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742  14 sbin/io-usb-otg               21r CONDVAR                   2028K 2192K     16K/992K
+   73742  15 sbin/io-usb-otg               21r CONDVAR                   2028K 2192K     16K/992K
+   73742  16 sbin/io-usb-otg               21r RECEIVE                   2028K 2192K     16K/992K
+             io-usb-otg                    @5a217a6000                 376K   12K
+             ldqnx-64.so.2                 @34a20ab000                 228K   12K
+             libsecpol.so.1                @34a20e8000                  20K  4096
+             libpci.so.3.0                 @34a20ef000                 136K   16K
+             libc.so.6                     @34a2117000                 672K  8192
+             libgcc_s.so.1                 @34a21cb000                  76K  4096
+             devu-hcd-bcm2711-xhci.so      @34a21e0000                  96K  4096
+             libm.so.3                     @34a21fa000                 248K  4096
+             pci_slog2.so.3.0              @34a223a000                 8192  4096
+             libslog2.so.1                 @34a223e000                  20K  4096
+             pci_debug2.so.3.0             @34a2245000                 4096  4096
+             pci_hw-bcm2711-rpi4.so.3.0    @34a2248000                  80K  4096
+             pci_cap-0x10.so.3.0           @34a2262000                  28K  4096
+             pci_cap-0x05.so.3.0           @34a226b000                  20K  4096
+             pci_cap-0x01.so.3.0           @34a2272000                  16K  4096
+             /slogger2/io_usb_otg.73742..0 @219168b000 (       0)             68K
+             /slogger2/io_usb_otg.73742..1 @219169c000 (       0)             68K
+             /dev/shmem/pci/pci_db         @21916ad000 (       0)            8192
+             /dev/shmem/pci/pci_sync       @21916af000 (       0)            4096
+             /dev/shmem/pci/pci_hw         @21916b0000 (       0)            4096
+             memory                        @21916b1000 (fd500000)             40K
+             memory                        @21916bb000 (600000000)            4096
+             below1G                       @21916bc000 (       0)            4096
+             memory                        @21916bd000 (   1c000)            4096
+             memory                        @21916be000 (   1c000)            4096
+             memory                        @21916bf000 (   1c000)            4096
+             memory                        @21916c0000 (   1c000)            4096
+             below1G                       @21916c1000 (       0)            4096
+             **unlinked**                  @21916c2000 (       0)            4096
+             below1G                       @21916c3000 (       0)            252K
+             **unlinked**                  @2191702000 (       0)            252K
+             below1G                       @2191741000 (       0)            4096
+             **unlinked**                  @2191742000 (       0)            4096
+             below1G                       @2191743000 (       0)            4096
+             **unlinked**                  @2191744000 (       0)            4096
+             below1G                       @2191745000 (       0)            4096
+             **unlinked**                  @2191746000 (       0)            4096
+             below1G                       @2191747000 (       0)            4096
+             **unlinked**                  @2191748000 (       0)            4096
+             below1G                       @2191749000 (       0)            4096
+             **unlinked**                  @219174a000 (       0)            4096
+             below1G                       @219174b000 (       0)            4096
+             **unlinked**                  @219174c000 (       0)            4096
+             below1G                       @219174d000 (       0)            4096
+             **unlinked**                  @219174e000 (       0)            4096
+             **anonymous**                 @219174f000 (       0)            4096
+             below1G                       @2191750000 (       0)            4096
+             **unlinked**                  @2191751000 (       0)            4096
+             below1G                       @2191752000 (       0)            4096
+             **zero ELF**                  @34a20e7000 (       0)            4096
+             **zero ELF**                  @34a20ed000 (       0)            4096
+             **zero ELF**                  @34a2111000 (       0)            8192
+             **zero ELF**                  @34a21bf000 (       0)             16K
+             **zero ELF**                  @34a21c5000 (       0)             24K
+             **zero ELF**                  @34a21de000 (       0)            4096
+             **zero ELF**                  @34a21f8000 (       0)            4096
+             **zero ELF**                  @34a2238000 (       0)            4096
+             **zero ELF**                  @34a223c000 (       0)            4096
+             **zero ELF**                  @34a2243000 (       0)            4096
+             **zero ELF**                  @34a2246000 (       0)            4096
+             **zero ELF**                  @34a225c000 (       0)            4096
+             **zero ELF**                  @34a225e000 (       0)             16K
+             **zero ELF**                  @34a2269000 (       0)            4096
+             **zero ELF**                  @34a2270000 (       0)            4096
+             **zero ELF**                  @34a2276000 (       0)            4096
+             **heap**                      @4cd7ee0000 (       0)            548K
+             **heap**                      @4cd7f69000 (       0)            4096
+             **heap**                      @4cd7f6a000 (       0)            692K
+             **zero ELF**                  @5a21807000 (       0)            4096
+   98319   1 sbin/devf-ram                 10r SIGWAITINFO               1420K   16M   512K/1536K
+   98319   3 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+   98319   4 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+   98319   5 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+   98319   6 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+             devf-ram                      @4afda23000                 176K  8192
+             ldqnx-64.so.2                 @2cb97ff000                 228K   12K
+             libsecpol.so.1                @2cb983c000                  20K  4096
+             libm.so.3                     @2cb9843000                 248K  4096
+             libc.so.6                     @2cb9883000                 672K  8192
+             libgcc_s.so.1                 @2cb9937000                  76K  4096
+             **zero ELF**                  @2cb983b000 (       0)            4096
+             **zero ELF**                  @2cb9841000 (       0)            4096
+             **zero ELF**                  @2cb9881000 (       0)            4096
+             **zero ELF**                  @2cb992b000 (       0)             16K
+             **zero ELF**                  @2cb9931000 (       0)             24K
+             **zero ELF**                  @2cb994a000 (       0)            4096
+             **heap**                      @3ab246e000 (       0)            276K
+             /dev/shmem/fs9                @529f894000 (       0)             16M
+  139277   1 sbin/io-sock                  21r SIGWAITINFO               7364K   30M   512K/1664K
+  139277   2 sbin/io-sock                  21r SIGWAITINFO               7364K   30M    32K/1664K
+  139277   3 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277   4 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277   5 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277   6 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277   7 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277   8 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277   9 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  10 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  11 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  12 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  13 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  14 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  15 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  16 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  17 sbin/io-sock                  21r CONDVAR                   7364K   30M    32K/1664K
+  139277  18 sbin/io-sock                  21r CONDVAR                   7364K   30M    32K/1664K
+  139277  19 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  20 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  21 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  23 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  24 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  25 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  26 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  27 sbin/io-sock                  21r RECEIVE                   7364K   30M    32K/1664K
+  139277  28 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  29 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  30 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  31 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  32 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  33 sbin/io-sock                  21r SEM                       7364K   30M    32K/1664K
+  139277  34 sbin/io-sock                  21r CONDVAR                   7364K   30M    32K/1664K
+  139277  35 sbin/io-sock                  21r CONDVAR                   7364K   30M    32K/1664K
+  139277  36 sbin/io-sock                  21r REPLY                     7364K   30M    16K/1664K
+  139277  37 sbin/io-sock                  21r REPLY                     7364K   30M    16K/1664K
+  139277  38 sbin/io-sock                  21r INTR                      7364K   30M    32K/1664K
+  139277  39 sbin/io-sock                  21r INTR                      7364K   30M    32K/1664K
+             io-sock                       @44b2b00000                4400K  440K
+             ldqnx-64.so.2                 @3b6bdc0000                 228K   12K
+             libsocket.so.4                @3b6bdfd000                 268K  4096
+             libslog2.so.1                 @3b6be49000                  20K  4096
+             libsecpol.so.1                @3b6be50000                  20K  4096
+             libz.so.2                     @3b6be57000                 100K  4096
+             libc.so.6                     @3b6be72000                 672K  8192
+             libgcc_s.so.1                 @3b6bf26000                  76K  4096
+             mods-phy.so                   @3b6bf3b000                 112K  8192
+             mods-fdt.so                   @3b6bf5b000                  92K  4096
+             libfdt.so.1                   @3b6bf76000                  36K  4096
+             mods-phy_fdt.so               @3b6bf81000                  16K  4096
+             mods-pci.so                   @3b6bf87000                 144K  4096
+             libpci.so.3.0                 @3b6bfad000                 136K   16K
+             pci_slog2.so.3.0              @3b6bfd5000                 8192  4096
+             pci_debug2.so.3.0             @3b6bfd9000                 4096  4096
+             mods-usb.so                   @3b6bfdc000                 112K  4096
+             libusbdci.so.2                @3b6bffa000                  52K  4096
+             devs-genet.so                 @3b6c009000                  28K  4096
+             devs-em.so                    @3b6c012000                 360K  4096
+             devs-ix.so                    @3b6c070000                 244K  4096
+             devs-re.so                    @3b6c0b0000                  48K  4096
+             devs-igc.so                   @3b6c0be000                  84K  4096
+             devs-axe.so                   @3b6c0d5000                  28K  4096
+             devs-axge.so                  @3b6c0de000                  20K  4096
+             devs-cdce.so                  @3b6c0e5000                  28K  4096
+             devs-smsc.so                  @3b6c0ee000                  28K  4096
+             **heap**                      @16fd9fa000 (       0)             16M
+             **heap**                      @16fea3a000 (       0)            4096
+             **heap**                      @16fea3b000 (       0)           1116K
+             **zero ELF**                  @3b6bdfc000 (       0)            4096
+             **zero ELF**                  @3b6be40000 (       0)            8192
+             **zero ELF**                  @3b6be43000 (       0)             24K
+             **zero ELF**                  @3b6be4e000 (       0)            4096
+             **zero ELF**                  @3b6be55000 (       0)            4096
+             **zero ELF**                  @3b6be70000 (       0)            4096
+             **zero ELF**                  @3b6bf1a000 (       0)             16K
+             **zero ELF**                  @3b6bf20000 (       0)             24K
+             **zero ELF**                  @3b6bf39000 (       0)            4096
+             **zero ELF**                  @3b6bf57000 (       0)            8192
+             **zero ELF**                  @3b6bf72000 (       0)            8192
+             **zero ELF**                  @3b6bf75000 (       0)            4096
+             **zero ELF**                  @3b6bf7f000 (       0)            4096
+             **zero ELF**                  @3b6bf85000 (       0)            4096
+             **zero ELF**                  @3b6bfab000 (       0)            4096
+             **zero ELF**                  @3b6bfcf000 (       0)            8192
+             **zero ELF**                  @3b6bfd7000 (       0)            4096
+             **zero ELF**                  @3b6bfda000 (       0)            4096
+             **zero ELF**                  @3b6bff8000 (       0)            4096
+             **zero ELF**                  @3b6c007000 (       0)            4096
+             **zero ELF**                  @3b6c010000 (       0)            4096
+             **zero ELF**                  @3b6c06c000 (       0)             12K
+             **zero ELF**                  @3b6c0ad000 (       0)            8192
+             **zero ELF**                  @3b6c0bc000 (       0)            4096
+             **zero ELF**                  @3b6c0d3000 (       0)            4096
+             **zero ELF**                  @3b6c0dc000 (       0)            4096
+             **zero ELF**                  @3b6c0e3000 (       0)            4096
+             **zero ELF**                  @3b6c0ec000 (       0)            4096
+             **zero ELF**                  @3b6c0f5000 (       0)            4096
+             **zero ELF**                  @44b2fba000 (       0)           1260K
+             shmem/slogger2/io_sock.139277 @5de0686000 (       0)             36K
+             **anonymous**                 @5de068f000 (       0)            4096
+             **anonymous**                 @5de0690000 (       0)            8192
+             **anonymous**                 @5de0692000 (       0)             12K
+             **anonymous**                 @5de0695000 (       0)             12K
+             **anonymous**                 @5de0698000 (       0)             16K
+             **anonymous**                 @5de069c000 (       0)             16K
+             **anonymous**                 @5de06a0000 (       0)             16K
+             **anonymous**                 @5de06a4000 (       0)             16K
+             **anonymous**                 @5de06a8000 (       0)             16K
+             **anonymous**                 @5de06ac000 (       0)             16K
+             **anonymous**                 @5de06b0000 (       0)             16K
+             **anonymous**                 @5de06b4000 (       0)             16K
+             **anonymous**                 @5de06b8000 (       0)             16K
+             **anonymous**                 @5de06bc000 (       0)           1024K
+             **anonymous**                 @5de07bc000 (       0)           1024K
+             **anonymous**                 @5de08bc000 (       0)           1024K
+             **anonymous**                 @5de09bc000 (       0)           1024K
+             **anonymous**                 @5de0abc000 (       0)           1024K
+             memory                        @5de0bbc000 (3df33000)             60K
+             **anonymous**                 @5de0bcb000 (       0)           1024K
+             **anonymous**                 @5de0ccb000 (       0)           1024K
+             **anonymous**                 @5de0dcb000 (       0)           1024K
+             **anonymous**                 @5de0ecb000 (       0)           1024K
+             memory                        @5de0fcb000 (fd5d2000)            4096
+             em/slogger2/io_sock.139277..0 @5de0fcc000 (       0)             68K
+             em/slogger2/io_sock.139277..1 @5de0fdd000 (       0)             68K
+             /dev/shmem/pci/pci_db         @5de0fee000 (       0)            8192
+             /dev/shmem/pci/pci_sync       @5de0ff0000 (       0)            4096
+             below1G                       @5de0ff1000 (       0)            4096
+             below1G                       @5de0ff2000 (       0)            4096
+             memory                        @5de0ff3000 (fd580000)             64K
+             **anonymous**                 @5de1003000 (       0)             16K
+             **anonymous**                 @5de1007000 (       0)             16K
+             **anonymous**                 @5de100b000 (       0)             16K
+             **anonymous**                 @5de100f000 (       0)             16K
+             **anonymous**                 @5de1013000 (       0)            128K
+             **anonymous**                 @5de1033000 (       0)            128K
+             **anonymous**                 @5de1053000 (       0)            128K
+             **anonymous**                 @5de1073000 (       0)            128K
+             **anonymous**                 @5de1093000 (       0)            128K
+             **anonymous**                 @5de10b3000 (       0)             16K
+             **anonymous**                 @5de10b7000 (       0)             16K
+             **anonymous**                 @5de10bb000 (       0)             16K
+             **anonymous**                 @5de10bf000 (       0)             16K
+             **anonymous**                 @5de10c3000 (       0)            128K
+             **anonymous**                 @5de10e3000 (       0)            128K
+             **anonymous**                 @5de1103000 (       0)            128K
+             **anonymous**                 @5de1123000 (       0)            128K
+             **anonymous**                 @5de1143000 (       0)             16K
+             **anonymous**                 @5de1147000 (       0)             16K
+             **anonymous**                 @5de114b000 (       0)             16K
+             **anonymous**                 @5de114f000 (       0)             16K
+             **anonymous**                 @5de1153000 (       0)            128K
+             **anonymous**                 @5de1173000 (       0)            128K
+             **anonymous**                 @5de1193000 (       0)            128K
+             **anonymous**                 @5de11b3000 (       0)            128K
+  139282   1 sbin/dhcpcd                   10r SIGWAITINFO               1528K  268K    512K/512K
+             dhcpcd                        @5a17657000                 284K   12K
+             ldqnx-64.so.2                 @2ede99f000                 228K   12K
+             libsocket.so.4                @2ede9dc000                 268K  4096
+             libc.so.6                     @2edea28000                 672K  8192
+             libgcc_s.so.1                 @2edeadc000                  76K  4096
+             **heap**                      @13f03f3000 (       0)            148K
+             **zero ELF**                  @2ede9db000 (       0)            4096
+             **zero ELF**                  @2edea1f000 (       0)            8192
+             **zero ELF**                  @2edea22000 (       0)             24K
+             **zero ELF**                  @2edead0000 (       0)             16K
+             **zero ELF**                  @2edead6000 (       0)             24K
+             **zero ELF**                  @2edeaef000 (       0)            4096
+  180243   1 usr/sbin/sshd                 10r SIGWAITINFO               5844K 1000K    512K/512K
+             sshd                          @5ad2777000                 524K   16K
+             ldqnx-64.so.2                 @481ca17000                 228K   12K
+             libsecpol.so.1                @481ca54000                  20K  4096
+             libpam.so.2                   @481ca5b000                  64K  4096
+             libsocket.so.4                @481ca6d000                 268K  4096
+             libregex.so.1                 @481cab9000                  60K  4096
+             libcrypto.so.3                @481caca000                3832K   12K
+             libz.so.2                     @481cee3000                 100K  4096
+             libc.so.6                     @481cefe000                 672K  8192
+             libgcc_s.so.1                 @481cfb2000                  76K  4096
+             **heap**                      @172d157000 (       0)            412K
+             **heap**                      @286f76b000 (       0)             64K
+             **zero ELF**                  @481ca53000 (       0)            4096
+             **zero ELF**                  @481ca59000 (       0)            4096
+             **zero ELF**                  @481ca6b000 (       0)            4096
+             **zero ELF**                  @481cab0000 (       0)            8192
+             **zero ELF**                  @481cab3000 (       0)             24K
+             **zero ELF**                  @481cac8000 (       0)            4096
+             **zero ELF**                  @481ce88000 (       0)            344K
+             **zero ELF**                  @481cee1000 (       0)            8192
+             **zero ELF**                  @481cefc000 (       0)            4096
+             **zero ELF**                  @481cfa6000 (       0)             16K
+             **zero ELF**                  @481cfac000 (       0)             24K
+             **zero ELF**                  @481cfc5000 (       0)            4096
+             **zero ELF**                  @5ad27fe000 (       0)            4096
+  188432   1 sbin/devc-pty                 10r RECEIVE                   1060K  172K    512K/512K
+             devc-pty                      @360457b000                  64K  8192
+             ldqnx-64.so.2                 @5a178eb000                 228K   12K
+             libsecpol.so.1                @5a17928000                  20K  4096
+             libc.so.6                     @5a1792f000                 672K  8192
+             libgcc_s.so.1                 @5a179e3000                  76K  4096
+             **heap**                      @247b059000 (       0)             84K
+             **zero ELF**                  @5a17927000 (       0)            4096
+             **zero ELF**                  @5a1792d000 (       0)            4096
+             **zero ELF**                  @5a179d7000 (       0)             16K
+             **zero ELF**                  @5a179dd000 (       0)             24K
+             **zero ELF**                  @5a179f6000 (       0)            4096
+  188433   1 usr/sbin/qconn                10r SIGWAITINFO               1408K  240K    512K/768K
+  188433   2 usr/sbin/qconn                10r RECEIVE                   1408K  240K    256K/768K
+             qconn                         @40d33fe000                 140K  8192
+             ldqnx-64.so.2                 @3fcb59c000                 228K   12K
+             libsocket.so.4                @3fcb5d9000                 268K  4096
+             libtracelog.so.1              @3fcb625000                  24K  4096
+             libc.so.6                     @3fcb62d000                 672K  8192
+             libgcc_s.so.1                 @3fcb6e1000                  76K  4096
+             **zero ELF**                  @3fcb5d8000 (       0)            4096
+             **zero ELF**                  @3fcb61c000 (       0)            8192
+             **zero ELF**                  @3fcb61f000 (       0)             24K
+             **zero ELF**                  @3fcb62b000 (       0)            4096
+             **zero ELF**                  @3fcb6d5000 (       0)             16K
+             **zero ELF**                  @3fcb6db000 (       0)             24K
+             **zero ELF**                  @3fcb6f4000 (       0)            4096
+             **zero ELF**                  @40d3423000 (       0)             32K
+             **heap**                      @57d692b000 (       0)             84K
+  192532   1 bin/ksh                       10r SIGSUSPEND                1216K  168K    512K/512K
+             ksh                           @12cef00000                 240K   12K
+             ldqnx-64.so.2                 @4bb50c3000                 228K   12K
+             libc.so.6                     @4bb5100000                 672K  8192
+             libgcc_s.so.1                 @4bb51b4000                  76K  4096
+             **zero ELF**                  @12cef3f000 (       0)            8192
+             **heap**                      @281a31a000 (       0)             76K
+             **zero ELF**                  @4bb50ff000 (       0)            4096
+             **zero ELF**                  @4bb51a8000 (       0)             16K
+             **zero ELF**                  @4bb51ae000 (       0)             24K
+             **zero ELF**                  @4bb51c7000 (       0)            4096
+ 1613845   1 bin/ksh                       10r SIGSUSPEND                1216K  168K    512K/512K
+             ksh                           @5b84f8a000                 240K   12K
+             ldqnx-64.so.2                 @165c31c000                 228K   12K
+             libc.so.6                     @165c359000                 672K  8192
+             libgcc_s.so.1                 @165c40d000                  76K  4096
+             **zero ELF**                  @165c358000 (       0)            4096
+             **zero ELF**                  @165c401000 (       0)             16K
+             **zero ELF**                  @165c407000 (       0)             24K
+             **zero ELF**                  @165c420000 (       0)            4096
+             **heap**                      @3acc19c000 (       0)             76K
+             **zero ELF**                  @5b84fc9000 (       0)            8192
+ 1634326   1 bin/ksh                       10r REPLY                     1216K  168K    512K/512K
+             ksh                           @5b84f8a000                 240K   12K
+             ldqnx-64.so.2                 @165c31c000                 228K   12K
+             libc.so.6                     @165c359000                 672K  8192
+             libgcc_s.so.1                 @165c40d000                  76K  4096
+             **zero ELF**                  @165c358000 (       0)            4096
+             **zero ELF**                  @165c401000 (       0)             16K
+             **zero ELF**                  @165c407000 (       0)             24K
+             **zero ELF**                  @165c420000 (       0)            4096
+             **heap**                      @3acc19c000 (       0)             76K
+             **zero ELF**                  @5b84fc9000 (       0)            8192
+ 1634327   1 usr/bin/top                   10r NANOSLEEP                  996K  156K    512K/512K
+             top                           @5a403d9000                  20K  8192
+             ldqnx-64.so.2                 @38ca522000                 228K   12K
+             libc.so.6                     @38ca55f000                 672K  8192
+             libgcc_s.so.1                 @38ca613000                  76K  4096
+             **heap**                      @1403a23000 (       0)             76K
+             **zero ELF**                  @38ca55e000 (       0)            4096
+             **zero ELF**                  @38ca607000 (       0)             16K
+             **zero ELF**                  @38ca60d000 (       0)             24K
+             **zero ELF**                  @38ca626000 (       0)            4096
+ 1654808   1 bin/pidin                     10r REPLY                     1060K  236K    512K/512K
+             pidin                         @410138c000                  84K   20K
+             ldqnx-64.so.2                 @1905b70000                 228K   12K
+             libc.so.6                     @1905bad000                 672K  8192
+             libgcc_s.so.1                 @1905c61000                  76K  4096
+             **zero ELF**                  @1905bac000 (       0)            4096
+             **zero ELF**                  @1905c55000 (       0)             16K
+             **zero ELF**                  @1905c5b000 (       0)             24K
+             **zero ELF**                  @1905c74000 (       0)            4096
+             **heap**                      @31692f8000 (       0)            140K
+             **zero ELF**                  @41013a6000 (       0)            4096
+========================================
+OTA start: Thu Jan  1 00:00:37 GMT 1970
+New image : /fs/boot/test-ifs.bin
+Current   : /fs/boot/ifs-rpi4.bin
+Backup    : /fs/boot/ota/ifs-rpi4.bin.bak
+--- BEFORE ---
+[vmstat]
+         Type InUse MemUse Requests  Size(s)
+  ether_multi     8     1K        8  16,32,128
+       ifaddr    35    12K       35  16,32,64,256,384,2048,4096
+        ifnet     6    11K        6  128,2048
+        clone    17     5K       17  256
+        ipsec     3     1K        3  256
+      lltable    16     4K       16  256
+       pfsync     2     5K        2  384,4096
+          tun     3     1K        3  32
+         igmp     5     1K        5  128
+    in6_multi     9     1K        9  32,256
+     in_multi     1     1K        1  256
+          BPF     5     1K        5  128
+encap_export_host    18     1K       18  32,64
+    mroutetbl     4    27K        4  256,2048,8192,16384
+  inpcbpolicy    16     1K       29  32
+         kenv     1     8K        1  8192
+        hhook    15     3K       17  16,32,256
+      ithread    18     3K       18  32,128,256
+       prison     4     1K        6  64
+       linker    96    10K      224  16,32,64,384
+         temp    23     1K       88  16,64,256,512,1024,2048,65536
+       devbuf   114    72K      126  16,32,64,128,65536
+       module   114    15K      114  128
+     mtx_pool     2    72K        2  8192,65536
+          osd     1     1K        1  16
+         cred    22     9K       37  384
+    sysctloid 10817   637K    10831  16,32,64,128
+      callout     4  1024K        4  
+    ipsec-saq     2     2K        2  1024
+  ipsecpolicy     2     2K        2  256,1024
+       sahead     1     1K        1  1024
+     secasvar     1     1K        1  1024
+          mld     3     1K        3  128
+       ip6ndp     4     1K        4  64,256
+        nhops     6     1K        6  128
+      pf_hash     7 11528K        7  2048
+     pf_ifnet    11     5K       17  256,2048
+         pfil     5     1K        5  128
+       busdma   514   289K      514  128,1024
+   QNX_device    11     4K       11  16,256,512
+        epoch     5    17K        5  256,4096
+       resmgr    74    66K       74  128,2048,4096
+     nexusdev     7     1K        7  16,64
+     routetbl    23     8K       57  16,32,64,128,256,384,512,1024,2048
+    sctp_iter     0     0K        1  256
+     sctp_ifn     1     1K        4  128
+     sctp_ifa     3     1K        4  128
+     sctp_vrf     1     1K        1  64
+    sctp_a_it     0     0K        1  16
+       bus-sc    11    81K     7618  16,64,128,1024,2048,16384,65536
+          bus   492    54K     8104  16,32,64,128,256
+chacha20random     1     1K        1  1024
+ eventhandler    77     7K       77  64,128
+   gtaskqueue    30    28K       30  16,32,384,8192
+         kobj    59   236K       67  4096
+       crypto     2     1K        2  64,256
+      Per-cpu     1     1K        1  32
+         rman    13     2K       13  32,128
+         sbuf     1     1K       12  16,32,64,128,256
+    taskqueue    25     4K       25  16,32,384
+       Unitno    21     2K       29  32,64
+    hostcache     1    32K        1  32768
+      tcpfunc     1     1K        1  64
+     syncache     1    68K        1  
+          pcb    21   201K       21  16,32,64,128,1024,2048,8192,16384
+       soname     2     1K        8  16,32
+      soidstr     2     1K        2  32
+       vnodes     2     2K        2  1024
+          UMA    88     2K       88  16,32
+vnet_data_free     1     1K        1  32
+    vnet_data     1   192K        1  
+         vnet     1     1K        1  128
+     openfirm   509    14K      799  16,32,64,128,256
+       syscon     1     1K        1  64
+       USBdev     1     1K        1  32
+          USB     5     2K        9  16,32,64,384,1024
+[pidin mem]
+     pid tid name                         prio STATE                      code  data        stack
+       1   1 /proc/boot/procnto-smp-instr   0f RUNNING                    631K  214K    124K/584K
+       1   2 /proc/boot/procnto-smp-instr   0f READY                      631K  214K    124K/584K
+       1   3 /proc/boot/procnto-smp-instr   0f RUNNING                    631K  214K    124K/584K
+       1   4 /proc/boot/procnto-smp-instr   0f RUNNING                    631K  214K    124K/584K
+       1   5 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   6 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   7 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   8 /proc/boot/procnto-smp-instr 255i INTR                       631K  214K       0/584K
+       1   9 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  10 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  11 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  12 /proc/boot/procnto-smp-instr 254i INTR                       631K  214K       0/584K
+       1  13 /proc/boot/procnto-smp-instr   1f NANOSLEEP                  631K  214K       0/584K
+       1  15 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  16 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  17 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  18 /proc/boot/procnto-smp-instr  21r RECEIVE                    631K  214K    8192/584K
+       1  19 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  20 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  21 /proc/boot/procnto-smp-instr  10r RUNNING                    631K  214K    8192/584K
+       1  22 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  23 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  25 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+       1  26 /proc/boot/procnto-smp-instr  10r RECEIVE                    631K  214K    8192/584K
+             procnto-smp-instr             @ffffff8060032000                 631K  214K
+       2   1 sbin/pipe                     10r SIGWAITINFO               1020K  428K    512K/560K
+       2   2 sbin/pipe                     10r RECEIVE                   1020K  428K     12K/560K
+       2   4 sbin/pipe                     10r RECEIVE                   1020K  428K     12K/560K
+       2   5 sbin/pipe                     10r RECEIVE                   1020K  428K     12K/560K
+       2   6 sbin/pipe                     10r RECEIVE                   1020K  428K     12K/560K
+             pipe                          @1b43fc5000                  24K  8192
+             ldqnx-64.so.2                 @4f0886b000                 228K   12K
+             libsecpol.so.1                @4f088a8000                  20K  4096
+             libc.so.6                     @4f088af000                 672K  8192
+             libgcc_s.so.1                 @4f08963000                  76K  4096
+             **zero ELF**                  @4f088a7000 (       0)            4096
+             **zero ELF**                  @4f088ad000 (       0)            4096
+             **zero ELF**                  @4f08957000 (       0)             16K
+             **zero ELF**                  @4f0895d000 (       0)             24K
+             **zero ELF**                  @4f08976000 (       0)            4096
+             **heap**                      @56ea73f000 (       0)            340K
+   20483   1 bin/slogger2                  10r RECEIVE                   1080K  608K    512K/512K
+             slogger2                      @11a192e000                  64K  8192
+             ldqnx-64.so.2                 @2cb3267000                 228K   12K
+             libslog2.so.1                 @2cb32a4000                  20K  4096
+             libsecpol.so.1                @2cb32ab000                  20K  4096
+             libc.so.6                     @2cb32b2000                 672K  8192
+             libgcc_s.so.1                 @2cb3366000                  76K  4096
+             **zero ELF**                  @2cb32a3000 (       0)            4096
+             **zero ELF**                  @2cb32a9000 (       0)            4096
+             **zero ELF**                  @2cb32b0000 (       0)            4096
+             **zero ELF**                  @2cb335a000 (       0)             16K
+             **zero ELF**                  @2cb3360000 (       0)             24K
+             **zero ELF**                  @2cb3379000 (       0)            4096
+             /shmem/slogger2/console.20483 @33454c9000 (       0)             20K
+             /shmem/slogger2/wdtkick.20487 @33454ce000 (       0)             68K
+             em/slogger2/i2c_bcm2711.20488 @33454df000 (       0)             68K
+             ogger2/devc_serminiuart.20490 @33454f0000 (       0)             68K
+             ger2/devb_sdmmc_bcm2711.20492 @3345501000 (       0)             68K
+             mem/slogger2/io_usb_otg.73742 @3345512000 (       0)             68K
+             /shmem/slogger2/dhcpcd.139280 @3345523000 (       0)             68K
+             **heap**                      @434d6e0000 (       0)             84K
+   20484   1 usr/sbin/dumper               10r RECEIVE                   1156K  260K     96K/192K
+   20484   2 usr/sbin/dumper               10r RECEIVE                   1156K  260K     96K/192K
+             dumper                        @4fd29bb000                  40K  8192
+             ldqnx-64.so.2                 @34c7a09000                 228K   12K
+             libsecpol.so.1                @34c7a46000                  20K  4096
+             libslog2.so.1                 @34c7a4d000                  20K  4096
+             libz.so.2                     @34c7a54000                 100K  4096
+             libc.so.6                     @34c7a6f000                 672K  8192
+             libgcc_s.so.1                 @34c7b23000                  76K  4096
+             **heap**                      @2a493e0000 (       0)             84K
+             **zero ELF**                  @34c7a45000 (       0)            4096
+             **zero ELF**                  @34c7a4b000 (       0)            4096
+             **zero ELF**                  @34c7a52000 (       0)            4096
+             **zero ELF**                  @34c7a6d000 (       0)            4096
+             **zero ELF**                  @34c7b17000 (       0)             16K
+             **zero ELF**                  @34c7b1d000 (       0)             24K
+             **zero ELF**                  @34c7b36000 (       0)            4096
+             **zero ELF**                  @4fd29c7000 (       0)             64K
+             v/shmem/slogger2/dumper.20484 @53a9244000 (       0)            8192
+   20485   1 sbin/mqueue                   10r RECEIVE                   1008K  172K      32K/32K
+             mqueue                        @17cff01000                  12K  8192
+             ldqnx-64.so.2                 @3b003c4000                 228K   12K
+             libsecpol.so.1                @3b00401000                  20K  4096
+             libc.so.6                     @3b00408000                 672K  8192
+             libgcc_s.so.1                 @3b004bc000                  76K  4096
+             **zero ELF**                  @3b00400000 (       0)            4096
+             **zero ELF**                  @3b00406000 (       0)            4096
+             **zero ELF**                  @3b004b0000 (       0)             16K
+             **zero ELF**                  @3b004b6000 (       0)             24K
+             **zero ELF**                  @3b004cf000 (       0)            4096
+             **heap**                      @40e1154000 (       0)             84K
+   20486   1 usr/sbin/random               10r SIGWAITINFO               5324K  932K   512K/1280K
+   20486   2 usr/sbin/random               10r NANOSLEEP                 5324K  932K   256K/1280K
+   20486   3 usr/sbin/random               10r RECEIVE                   5324K  932K   256K/1280K
+   20486   4 usr/sbin/random               10r RECEIVE                   5324K  932K   256K/1280K
+             random                        @230f9e6000                  36K   12K
+             ldqnx-64.so.2                 @3c170fd000                 228K   12K
+             libqcrypto.so.1.0             @3c1713a000                  36K  4096
+             libsecpol.so.1                @3c17145000                  20K  4096
+             libqh.so.1                    @3c1714c000                  72K  4096
+             libc.so.6                     @3c17161000                 672K  8192
+             libgcc_s.so.1                 @3c17215000                  76K  4096
+             libslog2.so.1                 @3c1722a000                  20K  4096
+             qcrypto-openssl-3.so          @3c17231000                  64K  4096
+             libcrypto.so.3                @3c17246000                3832K   12K
+             libsocket.so.4                @3c1765f000                 268K  4096
+             v/shmem/slogger2/random.20486 @128191e000 (       0)             36K
+             **zero ELF**                  @3c17139000 (       0)            4096
+             **zero ELF**                  @3c17143000 (       0)            4096
+             **zero ELF**                  @3c1714a000 (       0)            4096
+             **zero ELF**                  @3c1715e000 (       0)            8192
+             **zero ELF**                  @3c17209000 (       0)             16K
+             **zero ELF**                  @3c1720f000 (       0)             24K
+             **zero ELF**                  @3c17228000 (       0)            4096
+             **zero ELF**                  @3c1722f000 (       0)            4096
+             **zero ELF**                  @3c17241000 (       0)             16K
+             **zero ELF**                  @3c17604000 (       0)            344K
+             **zero ELF**                  @3c1765d000 (       0)            8192
+             **zero ELF**                  @3c176a2000 (       0)            8192
+             **zero ELF**                  @3c176a5000 (       0)             24K
+             **heap**                      @4ad68c6000 (       0)            356K
+   20487   1 bin/wdtkick                   10r NANOSLEEP                  992K   92K    512K/512K
+             wdtkick                       @3a55007000                  16K  8192
+             ldqnx-64.so.2                 @2f634d3000                 228K   12K
+             libc.so.6                     @2f63510000                 672K  8192
+             libgcc_s.so.1                 @2f635c4000                  76K  4096
+             **heap**                      @11c7685000 (       0)             12K
+             **zero ELF**                  @2f6350f000 (       0)            4096
+             **zero ELF**                  @2f635b8000 (       0)             16K
+             **zero ELF**                  @2f635be000 (       0)             24K
+             **zero ELF**                  @2f635d7000 (       0)            4096
+             memory                        @4c992cf000 (fe100000)            4096
+   20488   1 sbin/i2c-bcm2711              10r RECEIVE                   1024K  172K    512K/768K
+   20488   2 sbin/i2c-bcm2711              21r INTR                      1024K  172K    256K/768K
+             i2c-bcm2711                   @2ad1f34000                  28K  8192
+             ldqnx-64.so.2                 @5716365000                 228K   12K
+             libsecpol.so.1                @57163a2000                  20K  4096
+             libc.so.6                     @57163a9000                 672K  8192
+             libgcc_s.so.1                 @571645d000                  76K  4096
+             **heap**                      @136d8c8000 (       0)             84K
+             memory                        @3f77797000 (fe804000)            4096
+             **zero ELF**                  @57163a1000 (       0)            4096
+             **zero ELF**                  @57163a7000 (       0)            4096
+             **zero ELF**                  @5716451000 (       0)             16K
+             **zero ELF**                  @5716457000 (       0)             24K
+             **zero ELF**                  @5716470000 (       0)            4096
+   20489   1 sbin/pci-server               10r RECEIVE                   1484K  448K    256K/768K
+   20489   2 sbin/pci-server               10r RECEIVE                   1484K  448K    256K/768K
+   20489   3 sbin/pci-server               10r RECEIVE                   1484K  448K    256K/768K
+             pci-server                    @38948d2000                 152K  8192
+             ldqnx-64.so.2                 @270b5d9000                 228K   12K
+             libpci.so.3.0                 @270b616000                 136K   16K
+             libsecpol.so.1                @270b63e000                  20K  4096
+             libc.so.6                     @270b645000                 672K  8192
+             libgcc_s.so.1                 @270b6f9000                  76K  4096
+             pci_slog2.so.3.0              @270b70e000                 8192  4096
+             libslog2.so.1                 @270b712000                  20K  4096
+             pci_debug2.so.3.0             @270b719000                 4096  4096
+             pci_hw-bcm2711-rpi4.so.3.0    @270b71c000                  80K  4096
+             pci_cap-0x10.so.3.0           @270b736000                  28K  4096
+             _server-buscfg-generic.so.3.0 @270b73f000                  40K  4096
+             pci_cap-0x05.so.3.0           @270b74b000                  20K  4096
+             **heap**                      @1c739c6000 (       0)             28K
+             **heap**                      @1c739cd000 (       0)            4096
+             **heap**                      @1c739ce000 (       0)             80K
+             **zero ELF**                  @270b615000 (       0)            4096
+             **zero ELF**                  @270b638000 (       0)            8192
+             **zero ELF**                  @270b643000 (       0)            4096
+             **zero ELF**                  @270b6ed000 (       0)             16K
+             **zero ELF**                  @270b6f3000 (       0)             24K
+             **zero ELF**                  @270b70c000 (       0)            4096
+             **zero ELF**                  @270b710000 (       0)            4096
+             **zero ELF**                  @270b717000 (       0)            4096
+             **zero ELF**                  @270b71a000 (       0)            4096
+             **zero ELF**                  @270b730000 (       0)            4096
+             **zero ELF**                  @270b732000 (       0)             16K
+             **zero ELF**                  @270b73d000 (       0)            4096
+             **zero ELF**                  @270b749000 (       0)            4096
+             **zero ELF**                  @270b750000 (       0)            4096
+             mem/slogger2/pci_server.20489 @5d6bb76000 (       0)             68K
+             /dev/shmem/pci/pci_hw         @5d6bb87000 (       0)            4096
+             /slogger2/pci_server.20489..0 @5d6bb88000 (       0)             68K
+             memory                        @5d6bb99000 (fd500000)             40K
+             /dev/shmem/pci/pci_db         @5d6bba3000 (       0)            8192
+             /dev/shmem/pci/pci_sync       @5d6bba5000 (       0)            4096
+   20490   1 sbin/devc-serminiuart         10r RECEIVE                   1060K  172K    512K/512K
+   20490   2 sbin/devc-serminiuart        254i INTR                      1060K  172K       0/512K
+             devc-serminiuart              @5b75c11000                  64K  8192
+             ldqnx-64.so.2                 @31158ec000                 228K   12K
+             libsecpol.so.1                @3115929000                  20K  4096
+             libc.so.6                     @3115930000                 672K  8192
+             libgcc_s.so.1                 @31159e4000                  76K  4096
+             **heap**                      @1786e81000 (       0)             84K
+             **zero ELF**                  @3115928000 (       0)            4096
+             **zero ELF**                  @311592e000 (       0)            4096
+             **zero ELF**                  @31159d8000 (       0)             16K
+             **zero ELF**                  @31159de000 (       0)             24K
+             **zero ELF**                  @31159f7000 (       0)            4096
+             memory                        @40284e7000 (fe215000)            4096
+   20491   1 sbin/spi-bcm2711              10r SIGWAITINFO               1068K  260K   512K/1024K
+   20491   2 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   3 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   4 sbin/spi-bcm2711              10r RECEIVE                   1068K  260K   256K/1024K
+   20491   5 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   6 sbin/spi-bcm2711             254i INTR                      1068K  260K      0/1024K
+   20491   7 sbin/spi-bcm2711              10r RECEIVE                   1068K  260K   256K/1024K
+             spi-bcm2711                   @285bd27000                  52K  8192
+             ldqnx-64.so.2                 @1555c01000                 228K   12K
+             libslog2.so.1                 @1555c3e000                  20K  4096
+             libsecpol.so.1                @1555c45000                  20K  4096
+             libc.so.6                     @1555c4c000                 672K  8192
+             libgcc_s.so.1                 @1555d00000                  76K  4096
+             **zero ELF**                  @1555c3d000 (       0)            4096
+             **zero ELF**                  @1555c43000 (       0)            4096
+             **zero ELF**                  @1555c4a000 (       0)            4096
+             **zero ELF**                  @1555cf4000 (       0)             16K
+             **zero ELF**                  @1555cfa000 (       0)             24K
+             **zero ELF**                  @1555d13000 (       0)            4096
+             v/shmem/slogger2/io_spi.20491 @37f27bd000 (       0)             36K
+             memory                        @37f27c6000 (fe204000)            4096
+             logger2/bcm2711_dma_lib.20491 @37f27c7000 (       0)             36K
+             /dev/shmem/bcm2711_dmac_mutex @37f27d0000 (       0)            4096
+             memory                        @37f27d1000 (fe007000)            4096
+             memory                        @37f27d2000 (fe204000)            4096
+             **heap**                      @44fd237000 (       0)             20K
+             **heap**                      @44fd23c000 (       0)            4096
+             **heap**                      @44fd23d000 (       0)             64K
+   20492   1 sbin/devb-sdmmc-bcm2711       10r SIGWAITINFO               1656K   45M     64K/372K
+   20492   2 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     32K/372K
+   20492   3 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     32K/372K
+   20492   4 sbin/devb-sdmmc-bcm2711      254i INTR                      1656K   45M       0/372K
+   20492   5 sbin/devb-sdmmc-bcm2711       21r RECEIVE                   1656K   45M     16K/372K
+   20492   6 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492   7 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     24K/372K
+   20492   8 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     24K/372K
+   20492   9 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  10 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  11 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  12 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  13 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  14 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  15 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+   20492  16 sbin/devb-sdmmc-bcm2711       10r RECEIVE                   1656K   45M     20K/372K
+             devb-sdmmc-bcm2711            @472e32c000                 128K  8192
+             ldqnx-64.so.2                 @1e4d699000                 228K   12K
+             libsecpol.so.1                @1e4d6d6000                  20K  4096
+             libslog2.so.1                 @1e4d6dd000                  20K  4096
+             libcam.so.2                   @1e4d6e4000                  96K  4096
+             libc.so.6                     @1e4d6fe000                 672K  8192
+             libgcc_s.so.1                 @1e4d7b2000                  76K  4096
+             io-blk.so                     @1e4d7c7000                 276K  8192
+             libfsnotify.so.1              @1e4d811000                  40K   12K
+             cam-disk.so                   @1e4d81f000                  12K  4096
+             fs-dos.so                     @1e4d824000                  88K  4096
+             **zero ELF**                  @1e4d6d5000 (       0)            4096
+             **zero ELF**                  @1e4d6db000 (       0)            4096
+             **zero ELF**                  @1e4d6e2000 (       0)            4096
+             **zero ELF**                  @1e4d6fc000 (       0)            4096
+             **zero ELF**                  @1e4d7a6000 (       0)             16K
+             **zero ELF**                  @1e4d7ac000 (       0)             24K
+             **zero ELF**                  @1e4d7c5000 (       0)            4096
+             **zero ELF**                  @1e4d80c000 (       0)            8192
+             **zero ELF**                  @1e4d810000 (       0)            4096
+             **zero ELF**                  @1e4d81b000 (       0)            4096
+             **zero ELF**                  @1e4d822000 (       0)            4096
+             **zero ELF**                  @1e4d83a000 (       0)            4096
+             2/devb_sdmmc_bcm2711.20492..0 @2ac8def000 (       0)             68K
+             memory                        @2ac8e00000 (fe340000)            4096
+             below1G                       @2ac8e01000 (       0)            4096
+             below1G                       @2ac8e02000 (       0)            4096
+             **anonymous**                 @2ac8e03000 (       0)             43M
+             below1G                       @2acb908000 (       0)            4096
+             **heap**                      @5126f4b000 (       0)           1880K
+             **heap**                      @5127121000 (       0)            128K
+   73742   1 sbin/io-usb-otg               10r SIGWAITINFO               2028K 2192K    512K/992K
+   73742   2 sbin/io-usb-otg               10r CONDVAR                   2028K 2192K     16K/992K
+   73742   3 sbin/io-usb-otg               10r CONDVAR                   2028K 2192K     16K/992K
+   73742   4 sbin/io-usb-otg               10r CONDVAR                   2028K 2192K     16K/992K
+   73742   5 sbin/io-usb-otg               21r RECEIVE                   2028K 2192K     16K/992K
+   73742   6 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742   7 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742   8 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742   9 sbin/io-usb-otg               21r RECEIVE                   2028K 2192K     16K/992K
+   73742  10 sbin/io-usb-otg               24r RECEIVE                   2028K 2192K    256K/992K
+   73742  11 sbin/io-usb-otg               24r RECEIVE                   2028K 2192K     32K/992K
+   73742  12 sbin/io-usb-otg              254i INTR                      2028K 2192K       0/992K
+   73742  13 sbin/io-usb-otg               10r RECEIVE                   2028K 2192K     16K/992K
+   73742  14 sbin/io-usb-otg               21r CONDVAR                   2028K 2192K     16K/992K
+   73742  15 sbin/io-usb-otg               21r CONDVAR                   2028K 2192K     16K/992K
+   73742  16 sbin/io-usb-otg               21r RECEIVE                   2028K 2192K     16K/992K
+             io-usb-otg                    @4445947000                 376K   12K
+             ldqnx-64.so.2                 @3db1130000                 228K   12K
+             libsecpol.so.1                @3db116d000                  20K  4096
+             libpci.so.3.0                 @3db1174000                 136K   16K
+             libc.so.6                     @3db119c000                 672K  8192
+             libgcc_s.so.1                 @3db1250000                  76K  4096
+             devu-hcd-bcm2711-xhci.so      @3db1265000                  96K  4096
+             libm.so.3                     @3db127f000                 248K  4096
+             pci_slog2.so.3.0              @3db12bf000                 8192  4096
+             libslog2.so.1                 @3db12c3000                  20K  4096
+             pci_debug2.so.3.0             @3db12ca000                 4096  4096
+             pci_hw-bcm2711-rpi4.so.3.0    @3db12cd000                  80K  4096
+             pci_cap-0x10.so.3.0           @3db12e7000                  28K  4096
+             pci_cap-0x05.so.3.0           @3db12f0000                  20K  4096
+             pci_cap-0x01.so.3.0           @3db12f7000                  16K  4096
+             **heap**                      @142fc26000 (       0)            548K
+             **heap**                      @142fcaf000 (       0)            4096
+             **heap**                      @142fcb0000 (       0)            692K
+             **zero ELF**                  @3db116c000 (       0)            4096
+             **zero ELF**                  @3db1172000 (       0)            4096
+             **zero ELF**                  @3db1196000 (       0)            8192
+             **zero ELF**                  @3db1244000 (       0)             16K
+             **zero ELF**                  @3db124a000 (       0)             24K
+             **zero ELF**                  @3db1263000 (       0)            4096
+             **zero ELF**                  @3db127d000 (       0)            4096
+             **zero ELF**                  @3db12bd000 (       0)            4096
+             **zero ELF**                  @3db12c1000 (       0)            4096
+             **zero ELF**                  @3db12c8000 (       0)            4096
+             **zero ELF**                  @3db12cb000 (       0)            4096
+             **zero ELF**                  @3db12e1000 (       0)            4096
+             **zero ELF**                  @3db12e3000 (       0)             16K
+             **zero ELF**                  @3db12ee000 (       0)            4096
+             **zero ELF**                  @3db12f5000 (       0)            4096
+             **zero ELF**                  @3db12fb000 (       0)            4096
+             **zero ELF**                  @44459a8000 (       0)            4096
+             /slogger2/io_usb_otg.73742..0 @5d074f9000 (       0)             68K
+             /slogger2/io_usb_otg.73742..1 @5d0750a000 (       0)             68K
+             /dev/shmem/pci/pci_db         @5d0751b000 (       0)            8192
+             /dev/shmem/pci/pci_sync       @5d0751d000 (       0)            4096
+             /dev/shmem/pci/pci_hw         @5d0751e000 (       0)            4096
+             memory                        @5d0751f000 (fd500000)             40K
+             memory                        @5d07529000 (600000000)            4096
+             below1G                       @5d0752a000 (       0)            4096
+             memory                        @5d0752b000 (   1c000)            4096
+             memory                        @5d0752c000 (   1c000)            4096
+             memory                        @5d0752d000 (   1c000)            4096
+             memory                        @5d0752e000 (   1c000)            4096
+             below1G                       @5d0752f000 (       0)            4096
+             **unlinked**                  @5d07530000 (       0)            4096
+             below1G                       @5d07531000 (       0)            252K
+             **unlinked**                  @5d07570000 (       0)            252K
+             below1G                       @5d075af000 (       0)            4096
+             **unlinked**                  @5d075b0000 (       0)            4096
+             below1G                       @5d075b1000 (       0)            4096
+             **unlinked**                  @5d075b2000 (       0)            4096
+             below1G                       @5d075b3000 (       0)            4096
+             **unlinked**                  @5d075b4000 (       0)            4096
+             below1G                       @5d075b5000 (       0)            4096
+             **unlinked**                  @5d075b6000 (       0)            4096
+             below1G                       @5d075b7000 (       0)            4096
+             **unlinked**                  @5d075b8000 (       0)            4096
+             below1G                       @5d075b9000 (       0)            4096
+             **unlinked**                  @5d075ba000 (       0)            4096
+             below1G                       @5d075bb000 (       0)            4096
+             **unlinked**                  @5d075bc000 (       0)            4096
+             **anonymous**                 @5d075bd000 (       0)            4096
+             below1G                       @5d075be000 (       0)            4096
+             **unlinked**                  @5d075bf000 (       0)            4096
+             below1G                       @5d075c0000 (       0)            4096
+   98319   1 sbin/devf-ram                 10r SIGWAITINFO               1420K   16M   512K/1536K
+   98319   3 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+   98319   4 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+   98319   5 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+   98319   6 sbin/devf-ram                 10r RECEIVE                   1420K   16M   256K/1536K
+             devf-ram                      @29782c3000                 176K  8192
+             ldqnx-64.so.2                 @47e8931000                 228K   12K
+             libsecpol.so.1                @47e896e000                  20K  4096
+             libm.so.3                     @47e8975000                 248K  4096
+             libc.so.6                     @47e89b5000                 672K  8192
+             libgcc_s.so.1                 @47e8a69000                  76K  4096
+             /dev/shmem/fs9                @1083050000 (       0)             16M
+             **zero ELF**                  @47e896d000 (       0)            4096
+             **zero ELF**                  @47e8973000 (       0)            4096
+             **zero ELF**                  @47e89b3000 (       0)            4096
+             **zero ELF**                  @47e8a5d000 (       0)             16K
+             **zero ELF**                  @47e8a63000 (       0)             24K
+             **zero ELF**                  @47e8a7c000 (       0)            4096
+             **heap**                      @57fc63d000 (       0)            148K
+  139277   1 sbin/io-sock                  21r SIGWAITINFO               7364K   31M   512K/1664K
+  139277   2 sbin/io-sock                  21r SIGWAITINFO               7364K   31M    32K/1664K
+  139277   3 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277   4 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277   5 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277   6 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277   7 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277   8 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277   9 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  10 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  11 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  12 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  13 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  14 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  15 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  16 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  17 sbin/io-sock                  21r CONDVAR                   7364K   31M    32K/1664K
+  139277  18 sbin/io-sock                  21r CONDVAR                   7364K   31M    32K/1664K
+  139277  19 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  20 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  21 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  23 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  24 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  25 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  26 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  27 sbin/io-sock                  21r RECEIVE                   7364K   31M    32K/1664K
+  139277  28 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  29 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  30 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  31 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  32 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  33 sbin/io-sock                  21r SEM                       7364K   31M    32K/1664K
+  139277  34 sbin/io-sock                  21r CONDVAR                   7364K   31M    32K/1664K
+  139277  35 sbin/io-sock                  21r CONDVAR                   7364K   31M    32K/1664K
+  139277  36 sbin/io-sock                  21r REPLY                     7364K   31M    16K/1664K
+  139277  37 sbin/io-sock                  21r REPLY                     7364K   31M    16K/1664K
+  139277  38 sbin/io-sock                  21r INTR                      7364K   31M    32K/1664K
+  139277  39 sbin/io-sock                  21r INTR                      7364K   31M    32K/1664K
+             io-sock                       @4c08d17000                4400K  440K
+             ldqnx-64.so.2                 @552d946000                 228K   12K
+             libsocket.so.4                @552d983000                 268K  4096
+             libslog2.so.1                 @552d9cf000                  20K  4096
+             libsecpol.so.1                @552d9d6000                  20K  4096
+             libz.so.2                     @552d9dd000                 100K  4096
+             libc.so.6                     @552d9f8000                 672K  8192
+             libgcc_s.so.1                 @552daac000                  76K  4096
+             mods-phy.so                   @552dac1000                 112K  8192
+             mods-fdt.so                   @552dae1000                  92K  4096
+             libfdt.so.1                   @552dafc000                  36K  4096
+             mods-phy_fdt.so               @552db07000                  16K  4096
+             mods-pci.so                   @552db0d000                 144K  4096
+             libpci.so.3.0                 @552db33000                 136K   16K
+             pci_slog2.so.3.0              @552db5b000                 8192  4096
+             pci_debug2.so.3.0             @552db5f000                 4096  4096
+             mods-usb.so                   @552db62000                 112K  4096
+             libusbdci.so.2                @552db80000                  52K  4096
+             devs-genet.so                 @552db8f000                  28K  4096
+             devs-em.so                    @552db98000                 360K  4096
+             devs-ix.so                    @552dbf6000                 244K  4096
+             devs-re.so                    @552dc36000                  48K  4096
+             devs-igc.so                   @552dc44000                  84K  4096
+             devs-axe.so                   @552dc5b000                  28K  4096
+             devs-axge.so                  @552dc64000                  20K  4096
+             devs-cdce.so                  @552dc6b000                  28K  4096
+             devs-smsc.so                  @552dc74000                  28K  4096
+             **heap**                      @2bfaeab000 (       0)             16M
+             **heap**                      @2bfbfa0000 (       0)            4096
+             **heap**                      @2bfbfa1000 (       0)           1152K
+             shmem/slogger2/io_sock.139277 @32480c3000 (       0)             36K
+             **anonymous**                 @32480cc000 (       0)            4096
+             **anonymous**                 @32480cd000 (       0)            8192
+             **anonymous**                 @32480cf000 (       0)             12K
+             **anonymous**                 @32480d2000 (       0)             12K
+             **anonymous**                 @32480d5000 (       0)             16K
+             **anonymous**                 @32480d9000 (       0)             16K
+             **anonymous**                 @32480dd000 (       0)             16K
+             **anonymous**                 @32480e1000 (       0)             16K
+             **anonymous**                 @32480e5000 (       0)             16K
+             **anonymous**                 @32480e9000 (       0)             16K
+             **anonymous**                 @32480ed000 (       0)             16K
+             **anonymous**                 @32480f1000 (       0)             16K
+             **anonymous**                 @32480f5000 (       0)             16K
+             **anonymous**                 @32480f9000 (       0)           1024K
+             **anonymous**                 @32481f9000 (       0)           1024K
+             **anonymous**                 @32482f9000 (       0)           1024K
+             **anonymous**                 @32483f9000 (       0)           1024K
+             **anonymous**                 @32484f9000 (       0)           1024K
+             memory                        @32485f9000 (3df33000)             60K
+             **anonymous**                 @3248608000 (       0)             16K
+             **anonymous**                 @324860c000 (       0)             16K
+             **anonymous**                 @3248610000 (       0)             16K
+             **anonymous**                 @3248614000 (       0)             16K
+             **anonymous**                 @3248618000 (       0)           1024K
+             **anonymous**                 @3248718000 (       0)           1024K
+             **anonymous**                 @3248818000 (       0)           1024K
+             **anonymous**                 @3248918000 (       0)           1024K
+             memory                        @3248a18000 (fd5d2000)            4096
+             em/slogger2/io_sock.139277..0 @3248a19000 (       0)             68K
+             em/slogger2/io_sock.139277..1 @3248a2a000 (       0)             68K
+             /dev/shmem/pci/pci_db         @3248a3b000 (       0)            8192
+             /dev/shmem/pci/pci_sync       @3248a3d000 (       0)            4096
+             below1G                       @3248a3e000 (       0)            4096
+             below1G                       @3248a3f000 (       0)            4096
+             memory                        @3248a40000 (fd580000)             64K
+             **anonymous**                 @3248a50000 (       0)             16K
+             **anonymous**                 @3248a54000 (       0)             16K
+             **anonymous**                 @3248a58000 (       0)             16K
+             **anonymous**                 @3248a5c000 (       0)             16K
+             **anonymous**                 @3248a60000 (       0)            128K
+             **anonymous**                 @3248a80000 (       0)            128K
+             **anonymous**                 @3248aa0000 (       0)            128K
+             **anonymous**                 @3248ac0000 (       0)            128K
+             **anonymous**                 @3248ae0000 (       0)            128K
+             **anonymous**                 @3248b00000 (       0)             16K
+             **anonymous**                 @3248b04000 (       0)             16K
+             **anonymous**                 @3248b08000 (       0)             16K
+             **anonymous**                 @3248b0c000 (       0)             16K
+             **anonymous**                 @3248b10000 (       0)            128K
+             **anonymous**                 @3248b30000 (       0)            128K
+             **anonymous**                 @3248b50000 (       0)            128K
+             **anonymous**                 @3248b70000 (       0)            128K
+             **anonymous**                 @3248b90000 (       0)             16K
+             **anonymous**                 @3248b94000 (       0)             16K
+             **anonymous**                 @3248b98000 (       0)             16K
+             **anonymous**                 @3248b9c000 (       0)             16K
+             **anonymous**                 @3248ba0000 (       0)            128K
+             **anonymous**                 @3248bc0000 (       0)            128K
+             **anonymous**                 @3248be0000 (       0)            128K
+             **anonymous**                 @3248c00000 (       0)            128K
+             **zero ELF**                  @4c091d1000 (       0)           1260K
+             **zero ELF**                  @552d982000 (       0)            4096
+             **zero ELF**                  @552d9c6000 (       0)            8192
+             **zero ELF**                  @552d9c9000 (       0)             24K
+             **zero ELF**                  @552d9d4000 (       0)            4096
+             **zero ELF**                  @552d9db000 (       0)            4096
+             **zero ELF**                  @552d9f6000 (       0)            4096
+             **zero ELF**                  @552daa0000 (       0)             16K
+             **zero ELF**                  @552daa6000 (       0)             24K
+             **zero ELF**                  @552dabf000 (       0)            4096
+             **zero ELF**                  @552dadd000 (       0)            8192
+             **zero ELF**                  @552daf8000 (       0)            8192
+             **zero ELF**                  @552dafb000 (       0)            4096
+             **zero ELF**                  @552db05000 (       0)            4096
+             **zero ELF**                  @552db0b000 (       0)            4096
+             **zero ELF**                  @552db31000 (       0)            4096
+             **zero ELF**                  @552db55000 (       0)            8192
+             **zero ELF**                  @552db5d000 (       0)            4096
+             **zero ELF**                  @552db60000 (       0)            4096
+             **zero ELF**                  @552db7e000 (       0)            4096
+             **zero ELF**                  @552db8d000 (       0)            4096
+             **zero ELF**                  @552db96000 (       0)            4096
+             **zero ELF**                  @552dbf2000 (       0)             12K
+             **zero ELF**                  @552dc33000 (       0)            8192
+             **zero ELF**                  @552dc42000 (       0)            4096
+             **zero ELF**                  @552dc59000 (       0)            4096
+             **zero ELF**                  @552dc62000 (       0)            4096
+             **zero ELF**                  @552dc69000 (       0)            4096
+             **zero ELF**                  @552dc72000 (       0)            4096
+             **zero ELF**                  @552dc7b000 (       0)            4096
+  139282   1 sbin/dhcpcd                   10r SIGWAITINFO               1528K  268K    512K/512K
+             dhcpcd                        @3d0e525000                 284K   12K
+             ldqnx-64.so.2                 @11b803f000                 228K   12K
+             libsocket.so.4                @11b807c000                 268K  4096
+             libc.so.6                     @11b80c8000                 672K  8192
+             libgcc_s.so.1                 @11b817c000                  76K  4096
+             **zero ELF**                  @11b807b000 (       0)            4096
+             **zero ELF**                  @11b80bf000 (       0)            8192
+             **zero ELF**                  @11b80c2000 (       0)             24K
+             **zero ELF**                  @11b8170000 (       0)             16K
+             **zero ELF**                  @11b8176000 (       0)             24K
+             **zero ELF**                  @11b818f000 (       0)            4096
+             **heap**                      @281890f000 (       0)            148K
+  180243   1 usr/sbin/sshd                 10r SIGWAITINFO               5844K 1000K    512K/512K
+             sshd                          @121e1fb000                 524K   16K
+             ldqnx-64.so.2                 @5ed3939000                 228K   12K
+             libsecpol.so.1                @5ed3976000                  20K  4096
+             libpam.so.2                   @5ed397d000                  64K  4096
+             libsocket.so.4                @5ed398f000                 268K  4096
+             libregex.so.1                 @5ed39db000                  60K  4096
+             libcrypto.so.3                @5ed39ec000                3832K   12K
+             libz.so.2                     @5ed3e05000                 100K  4096
+             libc.so.6                     @5ed3e20000                 672K  8192
+             libgcc_s.so.1                 @5ed3ed4000                  76K  4096
+             **zero ELF**                  @121e282000 (       0)            4096
+             **heap**                      @3ca3048000 (       0)            476K
+             **zero ELF**                  @5ed3975000 (       0)            4096
+             **zero ELF**                  @5ed397b000 (       0)            4096
+             **zero ELF**                  @5ed398d000 (       0)            4096
+             **zero ELF**                  @5ed39d2000 (       0)            8192
+             **zero ELF**                  @5ed39d5000 (       0)             24K
+             **zero ELF**                  @5ed39ea000 (       0)            4096
+             **zero ELF**                  @5ed3daa000 (       0)            344K
+             **zero ELF**                  @5ed3e03000 (       0)            8192
+             **zero ELF**                  @5ed3e1e000 (       0)            4096
+             **zero ELF**                  @5ed3ec8000 (       0)             16K
+             **zero ELF**                  @5ed3ece000 (       0)             24K
+             **zero ELF**                  @5ed3ee7000 (       0)            4096
+  188432   1 sbin/devc-pty                 10r RECEIVE                   1060K  172K    512K/512K
+             devc-pty                      @31c6224000                  64K  8192
+             ldqnx-64.so.2                 @1ab8de6000                 228K   12K
+             libsecpol.so.1                @1ab8e23000                  20K  4096
+             libc.so.6                     @1ab8e2a000                 672K  8192
+             libgcc_s.so.1                 @1ab8ede000                  76K  4096
+             **zero ELF**                  @1ab8e22000 (       0)            4096
+             **zero ELF**                  @1ab8e28000 (       0)            4096
+             **zero ELF**                  @1ab8ed2000 (       0)             16K
+             **zero ELF**                  @1ab8ed8000 (       0)             24K
+             **zero ELF**                  @1ab8ef1000 (       0)            4096
+             **heap**                      @5b06fbf000 (       0)             84K
+  188433   1 usr/sbin/qconn                10r SIGWAITINFO               1408K  240K    512K/768K
+  188433   2 usr/sbin/qconn                10r RECEIVE                   1408K  240K    256K/768K
+             qconn                         @5fff967000                 140K  8192
+             ldqnx-64.so.2                 @3c0ab82000                 228K   12K
+             libsocket.so.4                @3c0abbf000                 268K  4096
+             libtracelog.so.1              @3c0ac0b000                  24K  4096
+             libc.so.6                     @3c0ac13000                 672K  8192
+             libgcc_s.so.1                 @3c0acc7000                  76K  4096
+             **zero ELF**                  @3c0abbe000 (       0)            4096
+             **zero ELF**                  @3c0ac02000 (       0)            8192
+             **zero ELF**                  @3c0ac05000 (       0)             24K
+             **zero ELF**                  @3c0ac11000 (       0)            4096
+             **zero ELF**                  @3c0acbb000 (       0)             16K
+             **zero ELF**                  @3c0acc1000 (       0)             24K
+             **zero ELF**                  @3c0acda000 (       0)            4096
+             **heap**                      @47ab861000 (       0)             84K
+             **zero ELF**                  @5fff98c000 (       0)             32K
+  192532   1 bin/ksh                       10r SIGSUSPEND                1216K  168K    512K/512K
+             ksh                           @366de85000                 240K   12K
+             ldqnx-64.so.2                 @4f61d4a000                 228K   12K
+             libc.so.6                     @4f61d87000                 672K  8192
+             libgcc_s.so.1                 @4f61e3b000                  76K  4096
+             **heap**                      @2906932000 (       0)             76K
+             **zero ELF**                  @366dec4000 (       0)            8192
+             **zero ELF**                  @4f61d86000 (       0)            4096
+             **zero ELF**                  @4f61e2f000 (       0)             16K
+             **zero ELF**                  @4f61e35000 (       0)             24K
+             **zero ELF**                  @4f61e4e000 (       0)            4096
+  192533   1 bin/ksh                       10r SIGSUSPEND                1216K  168K    512K/512K
+             ksh                           @2890ec4000                 240K   12K
+             ldqnx-64.so.2                 @5dd2f83000                 228K   12K
+             libc.so.6                     @5dd2fc0000                 672K  8192
+             libgcc_s.so.1                 @5dd3074000                  76K  4096
+             **zero ELF**                  @2890f03000 (       0)            8192
+             **heap**                      @47aeef6000 (       0)             76K
+             **zero ELF**                  @5dd2fbf000 (       0)            4096
+             **zero ELF**                  @5dd3068000 (       0)             16K
+             **zero ELF**                  @5dd306e000 (       0)             24K
+             **zero ELF**                  @5dd3087000 (       0)            4096
+  213014   1 bin/ksh                       10r REPLY                     1216K  168K    512K/512K
+             ksh                           @2890ec4000                 240K   12K
+             ldqnx-64.so.2                 @5dd2f83000                 228K   12K
+             libc.so.6                     @5dd2fc0000                 672K  8192
+             libgcc_s.so.1                 @5dd3074000                  76K  4096
+             **zero ELF**                  @2890f03000 (       0)            8192
+             **heap**                      @47aeef6000 (       0)             76K
+             **zero ELF**                  @5dd2fbf000 (       0)            4096
+             **zero ELF**                  @5dd3068000 (       0)             16K
+             **zero ELF**                  @5dd306e000 (       0)             24K
+             **zero ELF**                  @5dd3087000 (       0)            4096
+  213015   1 usr/bin/top                   10r NANOSLEEP                  996K  156K    512K/512K
+             top                           @5dd6136000                  20K  8192
+             ldqnx-64.so.2                 @1fba30a000                 228K   12K
+             libc.so.6                     @1fba347000                 672K  8192
+             libgcc_s.so.1                 @1fba3fb000                  76K  4096
+             **zero ELF**                  @1fba346000 (       0)            4096
+             **zero ELF**                  @1fba3ef000 (       0)             16K
+             **zero ELF**                  @1fba3f5000 (       0)             24K
+             **zero ELF**                  @1fba40e000 (       0)            4096
+             **heap**                      @2f37d58000 (       0)             76K
+  233496   1 bin/pidin                     10r REPLY                     1060K  236K    512K/512K
+             pidin                         @30b1af0000                  84K   20K
+             ldqnx-64.so.2                 @24ce218000                 228K   12K
+             libc.so.6                     @24ce255000                 672K  8192
+             libgcc_s.so.1                 @24ce309000                  76K  4096
+             **zero ELF**                  @24ce254000 (       0)            4096
+             **zero ELF**                  @24ce2fd000 (       0)             16K
+             **zero ELF**                  @24ce303000 (       0)             24K
+             **zero ELF**                  @24ce31c000 (       0)            4096
+             **zero ELF**                  @30b1b0a000 (       0)            4096
+             **heap**                      @5c8436c000 (       0)            140K

@@ -1,0 +1,26 @@
+===== SAMPLE 32 =====
+Computing times...23 processes; 136 threads;
+CPU states: 3.3% user, 0.8% kernel
+Memory: 2048M total, 1854M avail, page size 4K
+
+      PID   TID PRI STATE    HH:MM:SS    CPU  COMMAND             
+    20492     9  10 Rcv      00:00:00   2.85% devb-sdmmc-bcm2711  
+    20492     5  21 Rcv      00:00:00   0.22% devb-sdmmc-bcm2711  
+        1     6 255 Intr     00:00:00   0.22% kernel              
+        1     7 255 Intr     00:00:00   0.22% kernel              
+        1     5 255 Intr     00:00:00   0.21% kernel              
+    20492     6  21 Rcv      00:00:00   0.10% devb-sdmmc-bcm2711  
+    20492     3  21 Rcv      00:00:00   0.09% devb-sdmmc-bcm2711  
+        1    24  10 Run      00:00:00   0.06% kernel              
+    20492     4 254 Intr     00:00:00   0.03% devb-sdmmc-bcm2711  
+        1     9 254 Intr     00:00:00   0.02% kernel              
+
+  Idle:      Curr     Min     Max     Avg 
+CPU  0:     77.9%     77%     77%     77% 
+CPU  1:     77.9%     77%     77%     77% 
+CPU  2:     98.2%     98%     98%     98% 
+CPU  3:     99.9%     99%     99%     99% 
+Mem Avail:          1854M   1854M   1854M
+Processes:            23      23      23
+Threads:             136     136     136
+
