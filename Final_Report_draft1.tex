@@ -153,48 +153,304 @@ The following metrics are collected for each update mode:
 \subsection{Data Analysis Procedure}
 \textcolor{red}{How we summarized/display data (how we made graphs, what we measured for and how)}
 \section{OTA Tutorial}
-\textbf{\textcolor{red}{This is pulled from example final report repo, so we will need to augment}}
+\text{{The following are the requirements and steps wto replicate our OTA tests.}}
 \subsection{Hardware \& Software Requirements}
 \noindent
 \textbf{Github Repo:} \url{https://github.com/BenjaminWhitten/COMP4900-Quantum-Secure-OTA} \\
 \textbf{Host Server PC:} Windows 11 (with WSL Ubuntu) \\
-\textbf{QNX SDP:} Version 7.1 and 8.0 (requires BlackBerry QNX license) \\
-\textbf{Micro Controller:} Raspberry Pi 4
+\textbf{QNX SDP:} Version 8.0 (requires BlackBerry QNX license) \\
+\textbf{QNX Raspberry Pi Board Support:} QNX SDP 8.0 BSP for Raspberry Pi BCM2711 R-PI4 \\
+\textbf{Development IDE:} QNX Momentics IDE \\
+\textbf{QNX OS Terminal Interface:} PuTTY \\
+\textbf{Local Server:} Windows OpenSSH Server \\
+\textbf{Micro Controller:} Raspberry Pi 4 \\
+\textbf{Bootloader:} \url{https://github.com/u-boot/u-boot} \\
+\textbf{Raspberry Pi Firmware:} \url{https://github.com/raspberrypi/firmware.git}
 
 \noindent
 \textbf{Required Cables/Accessories:}
 \begin{itemize}
     \item USB to TTL serial cable (to access the Pi’s UART pins for console)
     \item Micro SD card (32 GB)
+    \item Ethernet Cable
 \end{itemize}
-\subsection{Install QNX SDP and Tools}
-\textcolor{red}{I fill in}
-\subsection{Configure QNX}
-\textcolor{red}{I fill in}
-\subsection{Windows 11 SSH Setup}
-\textcolor{red}{I fill in}
-\subsection{Compile U-boot}
-\textcolor{red}{I fill in}
-\subsection{Prepare Rasberry Pi 4}
-\textcolor{red}{I fill in}
-\subsection{Performing the OTA Update}
-\textcolor{red}{I fill in}
+\subsection{Install Necessary Software Tools}
+The first thing to do will be to make sure all the required software is downloaded.\\\\
+\textbf{1) Installing QNX SDP 8.0 and BSP:}
+\begin{enumerate}
+    \item Make sure you have downloaded the QNX Software Center from the QNX website. To do this, you will first need to create an account apply for a license.
+    \item Inside the software center, find the QNX SDP 8.0 package and install it Once you do, unzip it.
+    \item Find the package with the QNX BSP for the Raspberry Pi 4 and install it. Once you do, unzip it.
+    \item Find the package that contains QNX Momentics IDE and install it. Once you do, make sure you can open the IDE and import directories as projects. Follow any setup steps it prompts.
+\end{enumerate}
+
+\textbf{2) Installing Windows WSL:}
+\begin{enumerate}
+    \item Open Windows Powershell. Run the command \texttt{wsl --install}.
+    \item Open WSL. Navigate to the directory where you installed QNX SDP 8.0. It should be something similar to \texttt{/mnt/c/path-to-qnx-directory/qnx800}.
+    \item In the qnx800 directory, set up your work environment with this command: \texttt{source qnxsdp-env.sh}.
+\end{enumerate}
+
+\textbf{3) Installing Windows OpenSSH Server:}
+\begin{enumerate}
+    \item Locate OpenSSH Server and install it.
+    \item Open Windows Powershell. Run the following commands to start the SSH server:
+    \begin{itemize}
+        \item \texttt{Get-Service ssh-agent, sshd | Set-Service-StartupType Automatic}
+        \item \texttt{Start-Service ssh-agent}
+        \item \texttt{Start-Service sshd}
+    \end{itemize}
+\end{enumerate}
+
+\textbf{4) Installing PuTTY:}
+\begin{enumerate}
+    \item Go to the official PuTTY download page, and download the correct msi file for your system.
+    \item Locate the msi file and run it to launch the installer. Complete the setup, then make sure you can open the application.
+\end{enumerate}
+
+\textbf{5) Installing Liboqs:}
+\begin{enumerate}
+    \item Go to the QNX Software Center and make sure you have QNX SDP 8.0 BSP for Rasberry Pi BCM2711 R-P14 downloaded
+    \item From your local command prompt navigate to you QNX instance and run qnxsdp-env.bat
+    \item Install CMake and Ninja
+        \begin{verbatim}
+        winget install -e --id Kitware.CMake
+        winget install -e --id Ninja-build.Ninja
+        \end{verbatim}
+    \item Build Liboqs
+        \begin{verbatim}
+            cd C:\
+            git clone -b main https://github.com/open-quantum-safe/liboqs.git
+            cd liboqs
+            rmdir /s /q build-qnx-aarch64
+
+            cmake -S . -B build-qnx-aarch64 -G Ninja ^
+              -DCMAKE_SYSTEM_NAME=QNX ^
+              -DCMAKE_SYSTEM_PROCESSOR=aarch64 ^
+              -DCMAKE_C_COMPILER=qcc ^
+              -DCMAKE_CXX_COMPILER=q++ ^
+              -DCMAKE_AR:FILEPATH="C:/Users/harly/qnx800_2/host/win64/x86_64/usr/bin/aarch64-unknown-nto-qnx8.0.0-ar" ^
+              -DCMAKE_C_FLAGS="-Vgcc_ntoaarch64le" ^
+              -DCMAKE_CXX_FLAGS="-Vgcc_ntoaarch64le" ^
+              -DCMAKE_INSTALL_PREFIX=C:/liboqs/build-qnx-aarch64/install ^
+              -DOQS_BUILD_ONLY_LIB=ON ^
+              -DOQS_MINIMAL_BUILD="SIG_ml_dsa_44" ^
+              -DBUILD_SHARED_LIBS=OFF ^
+              -DOQS_USE_OPENSSL=OFF ^
+              DOQS_DIST_BUILD=OFF ^
+              -DOQS_OPT_TARGET=generic ^
+              -DOQS_USE_ARM_AES_INSTRUCTIONS=OFF ^
+              -DOQS_USE_ARM_SHA2_INSTRUCTIONS=OFF ^
+              -DOQS_USE_ARM_SHA3_INSTRUCTIONS=OFF ^
+              -DOQS_USE_ARM_NEON_INSTRUCTIONS=OFF
+            
+            cmake --build build-qnx-aarch64
+            cmake --install build-qnx-aarch64
+        \end{verbatim} 
+\end{enumerate}
+
+\subsection{Compile Bootloader (U-Boot)}
+Use WSL and clone the U-Boot Git repository (see section 5.1). Once you have it, follow these steps in WSL:
+\begin{enumerate}
+    \item Navigate to the u-boot directory that you cloned.
+    \item Make sure that you have the necessary libraries and that they are up to date. You can do this with \texttt{sudo apt update} followed by \texttt{sudo apt install -y git dosfstools gcc-aarch64-linux-gnu make flex bison bc libssl-dev libgnutls28-dev}.
+    \item Before you build the u-boot binary, create a config with the following command: \texttt{CROSS\_COMPILE=aarch64-linux-gnu- make rpi\_4\_defconfig}.
+    \item Now compile the u-boot binary with this command: \texttt{CROSS\_COMPILE=aarch64-linux-gnu- make -j\$(nproc)}. This should generate a \texttt{u-boot.bin} file.
+    \item Create a directory called \texttt{/boot\_files}. This is where you will store all the necessary files you need to boot the Raspberry Pi. Copy the \texttt{u-boot.bin} file into your \texttt{/boot\_files} directory.
+\end{enumerate}
+
+\subsection{Raspberry Pi Firmware Setup}
+Use WSL to clone the Raspberry Pi Firmware repository (see section 5.1).
+\begin{enumerate}
+    \item Navigate to the firmware directory that you cloned, and then into the \texttt{/boot} directory it contains.
+    \item Inside the directory there are a number of files. Copy the following files into your \texttt{/boot\_files} directory:
+    \begin{itemize}
+        \item \texttt{bcm2711-rpi-4-b.dtb}
+        \item \texttt{fixup4.dat}
+        \item \texttt{fixup4cd.dat}
+        \item \texttt{fixup4db.dat}
+        \item \texttt{fixup4x.dat}
+        \item \texttt{start4.elf}
+        \item \texttt{start4cd.elf}
+        \item \texttt{start4db.elf}
+        \item \texttt{start4x.elf} 
+        \item \texttt{rpi4.build}
+        \item \texttt{test-ifs.bin}
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Create Boot Script and Config File}
+Next, you are going to want a command that boots the image, as well as a config in order to ensure your boot goes smoothly. In your \texttt{/boot\_files} directory, follow the following steps:
+\begin{enumerate}
+    \item Create a file called \texttt{boot.cmd}. This will contain a script that will load your image into memory and boot it.
+    \item Put the following into your \texttt{boot.cmd} file:
+    \begin{verbatim}
+echo "Trying to load primary image"
+
+fdt addr -c
+
+# Load the fdt first
+setenv fdt_addr ${fdtcontroladdr}
+
+# Load the image into memory
+if load mmc 0:1 0x00080000 ${image}; then
+    echo "Loaded primary image into memory"
+    sleep 5
+    go 0x00080000 ${fdt_addr}
+
+# If it could not be loaded try to load a backup
+else
+    echo "Failed to load primary image memory"
+    if test "${image}" = "ifs-rpi4.bin"; then
+
+        # Loading the backup image
+        echo "Trying to load backup image"
+        if load mmc 0:1 0x00080000 ifs-rpi4.bin.bak; then
+            echo "Loaded backup image into memory"
+            sleep 5
+            go 0x00080000 ${fdt_addr}
+
+        # Indicate that no image could be loaded
+        else
+            echo "Failed to load backup image"
+        fi
+
+    # Specify that the boot image failed
+    else
+        echo "Boot failed for both primary and backup images"
+    fi
+fi
+    \end{verbatim}
+    Here is a quick rundown of what this does:
+    \begin{itemize}
+        \item The first thing the script does set the device tree address.
+        \item The script then loads your image into memory and checks if it was successful. If it was, the image is booted.
+        \item If no image was found or it was not loaded correctly, the script tries to find and load a backup image into memory. If this is successful, the script boots the backup image.
+    \end{itemize}
+    \item The file now needs to be converted into something Linux readable, then into an executable. Run the command \texttt{dos2unix boot.cmd}, and then \texttt{mkimage -A arm -T script -C none -n "Boot Script" -d boot.cmd boot.scr}. This will generate a file called \texttt{boot.scr}.
+    \item Create a \textt{config.txt} file. Insert the following into the file:
+    \begin{verbatim}
+arm_64bit=1
+cmdline=startup.txt
+device_tree=bcm2711-rpi-4-b.dtb
+enable_uart=1
+disable_commandline_tags=1
+force_turbo=1
+gpu_mem=16
+max_framebuffers=2
+dtparam=sd_poll_once
+kernel=u-boot.bin
+    \end{verbatim}
+\end{enumerate}
+
+\subsection{Create Raspberry Pi Image }
+You now need to build the Raspberry Pi image you actually want to run.
+\begin{enumerate}
+    \item Open your unzipped BSP directory as a new project in QNX Momentics IDE. In the \texttt{/images} directory, find the file \texttt{rpi4.build} file and replace it with \texttt{rpi4.build} the taken from \texttt{/boot\_files}.
+    
+    \item Make sure the startup line is the following: \texttt{startup-bcm2711-rpi4 -v -D miniuart -W 2500 -u arg -t "below1G:0x11000000:0x20000000"} (this line should be very close to the top of the file).
+    \item Under \texttt{/usr/share/terminfo/q/qansi} please insert file path to \newline \texttt{qnx800/target/qnx/usr/share/terminfo/q/qansi} from your local machine. 
+    \item Under the SD Memory Card section, ensure that the card is mounted as a readable directory as follows:
+    \begin{verbatim}
+devb-sdmmc-bcm2711 cam pnp mem name=below1G sdio addr=0xfe340000,irq=158 dos exe=all
+waitfor /dev/hd0 10
+mount -e /dev/hd0
+waitfor /dev/hd0t12 10
+mount -t dos /dev/hd0t12 /fs/sd
+    \end{verbatim}
+    \item You will find the scripts to run OTA updates at the bottum of your build file.
+    Here is a brief explanation of how the ML-DSA script works:
+    \begin{itemize}
+        \item Takes in the new boot image and the ML-DSA signature file
+        \item Checks that the image, signature, current image, and embedded ML-DSA public key all exist.
+        \item Starts a background sampler using top so CPU and RAM usage can be recorded during the update.
+        \item Runs /proc/boot/validate\_mldsa using the embedded public key and the provided signature.
+        \item If validation fails: the update is aborted, no install happens, a failure summary is still written to the log.
+        \item If validation passes it continues with the following update. 
+        \item Creates a backup of the current image as ifs-rpi4.bin.bak
+        \item Copies the new image into a temporary staged file, \texttt{ifs-rpi4.bin.new}.
+        \item Replaces the active boot image with the staged one, then syncs to flush writes to disk.
+        \item Stops the sampler and parses the recorded top output to calculate:total OTA time, average CPU. maximum CPU, average RAM, maximum RAM
+        \item Writes those results to ota\_summary.log and raw sample data to ota\_samples.csv.
+    \end{itemize}
+    \item Finally retrieve the executable files from \texttt{/aarch64\_bin} and place them within the same directory \texttt{/install/archlle/bin}. Then retrieve the \texttt{rsapubkey.pem} and \texttt{mldsa\_pubkey.bin} from the \texttt{signatures} file and similarly put into the directory \texttt{/install/archlle/bin}. 
+    \item Now that you are done with \texttt{rpi4.build}, build the project. This should generate a \texttt{ifs-rpi4.bin} image file. Copy this new file into your \texttt{/boot\_files} directory.
+\end{enumerate}
+\subsection{Sign Raspberry Pi Image}
+You now need to create the signature for your bin file
+\begin{enumerate}
+    \item To create the signature for your bin use the provided files \texttt{scr}: \texttt{sign\_mldsa}, \texttt{keys}: \texttt{mldsa\_prvkey.bin}, and \texttt{Makefile}
+    \item using the command make build the executable file for \texttt{sign\_mldsa.c}
+    \item Run the following command \texttt{./sign\_mldsa mldsa\_prvkey.bin ifs-rpi4.bin new-ifs.bin.sig}. This will generate your signed bin file
+\end{enumerate}
+
+\subsection{Boot the Raspberry Pi}
+Your setup should be mostly complete. Now, you need to boot the Raspberry Pi with your QNX image.
+\begin{enumerate}
+    \item Connect your SD card to your Windows machine. Copy everything from your \texttt{/boot\_files} directory into your SD card. Replace \texttt{ifs-rpi4.bin} with your \texttt{ifs-rpi4.bin} file and a copy called \texttt{new-ifs.bin}. Also add your new-\texttt{ifs.bin.sig} file you created above. Insert your SD card into the Raspberry Pi.
+    \item Connect the USB to TTL cable to your windows device, and the following TTL ends to the Raspberry Pi's UART pins:
+    \begin{itemize}
+        \item The black cable to pin 6
+        \item The green cable to pin 8
+        \item The white cable to pin 10
+        \item DO NOT PLUG IN THE RED CABLE
+    \end{itemize}
+    \item Open PuTTY, and choose the serial connection type. Check your Windows machine's Device Manager to see what Port is connected (should be similar to COM3). Fill the serial line with the port connection you found, and set the speed to 115200. Press Open, and you should see a blank terminal appear.
+    \item Connect the Raspberry Pi to power. The first time you boot, press any key to interrupt the boot, as we want to access the U-Boot terminal. From here, set an environment variable for the image and boot script, and run the script with the following commands:
+    \begin{verbatim}
+setenv bootcmd 'setenv image ifs-rpi4.bin; fatload mmc 0:1 ${loadaddr}
+boot.scr; source ${loadaddr}' (THIS IS ALL ONE LINE)
+
+saveenv
+
+reset
+    \end{verbatim}
+    \item From here, you should simply be able to watch your image boot. On future boots, you will not need to enter the U-Boot terminal again unless you want to change more environment variables.
+\end{enumerate}
+
+\subsection{Run the OTA Update}
+Finally, with your image up and running, we can try to run an OTA update.
+\begin{enumerate}
+    \item A network connection will have to be established first. Plug your Raspberry Pi into your Windows machine with an Ethernet cable.
+    \item On the QNX image, set a static IP with the command \texttt{ifconfig genet0 192.168.1.10 netmask 255.255.255.0 up}. Check to see if the network is active with the command \texttt{ifconfig genet0}.
+    \item On your Windows machine, open your windows settings. Navigate to Network \& internet, then find the Ethernet connection and click Edit next to IP Assignment, and choose the Manual option. Set the IP Address to 192.168.1.11, the Subnet Mask to 255.255.255.0, and then press save to apply changes.
+    \item The two devices should now be able to connect to each other. To test this, use the ping command to see if packets are received from either device. On both the Windows Command Prompt and your QNX OS image, the command syntax should be \texttt{ping <OTHER\_DEVICE\_STATIC\_IP>}. Both should result in packets being received consistently.
+    \item On your QNX image, run the following commands to set up the partitions needed for the OTA rollback capabilities.
+    \begin{verbatim}
+    fdisk /dev/hd0 add -s 2 -t 177 -c $A_START,$A_END
+    fdisk /dev/hd0 add -s 3 -t 178 -c $B_START,$B_END
+    fdisk /dev/hd0 add -s 4 -t 179 -c $D_START,$D_END
+
+    shutdown
+    mount -e /dev/hd0
+    ls /dev/hd0t*
+    
+    mkqnx6fs /dev/hd0t177
+    mkqnx6fs /dev/hd0t178
+    mkqnx6fs /dev/hd0t179
+
+    mount -t qnx6 /dev/hd0t177 /system
+    mount -t qnx6 /dev/hd0t179 /data
+    \end{verbatim}
+     \item Now to run your ML-DSA validated OTA update enter this command in terminal \texttt{ksh /proc/boot/ota\_update\_ifs\_rsa.sh /fs/boot/new-ifs.bin /fs/boot/new-ifs.bin.sig} 
+\end{enumerate}
+
 \section{Results and Analysis}
 \subsection{Summary of Findings}
-Table~\ref{tab:summary-results} is the primary benchmark summary table. Final values should be inserted after the full benchmark harness has been run.
-
-\begin{table}[H]
+\textcolor{red}{Table~\ref{tab:summary-results} is the primary benchmark summary table. Final values should be inserted after each version has been run multiple times and averaged bellow inserts are from 1 run each}
+\begin{table}[ht]
 \centering
-\caption{Summary of OTA Results (\textcolor{red}{fill in later})}
-\label{tab:summary-results}
-\begin{tabular}{lccccccc}
+\small
+\setlength{\tabcolsep}{4pt} % default is usually 6pt
+\caption{Summary of OTA Results}
+\begin{tabular}{lcccccccc}
 \toprule
- & Sign Time & Verify Time & Total OTA & CPU & RAM & Sig Size & Storage Overhead \\
- & (ms) & (ms) & (ms) & (\%) & (KB) & (bytes) & (bytes) \\
+  Verify Time & Total OTA & Avg CPU & Max CPU & Avg RAM & Max RAM & Sig Size \\
+  & (s) & (s) & (\%) & (\%) & (MB) & (MB) & (bytes) \\
 \midrule
-Unsigned & N/A & N/A & TBD & TBD & TBD & 0 & 0 \\
-RSA & TBD & TBD & TBD & TBD & TBD & TBD & TBD \\
-ML-DSA & TBD & TBD & TBD & TBD & TBD & TBD & TBD \\
+Unsigned & N/A & 7 & 2.5 & 4.5 & 194.75 & 195 & 0 \\
+RSA     & 1 & 7 & 3.7 & 4.7 & 194.5 & 195 & 256 \\
+ML-DSA  & 2 & 8 & 3.52 & 5.1 & 194 & 194 & 2420 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -206,8 +462,6 @@ ML-DSA & TBD & TBD & TBD & TBD & TBD & TBD & TBD \\
 \textcolor{red}{talk about quantitative results and analyze why + a nice graph}
 \subsection{Resource Usage}
 \textcolor{red}{talk about quantitative results and analyze why + a nice graph of CPU and a nice graph of RAM}
-\subsection{Signature Storage and Overhead}
-\textcolor{red}{talk about quantitative results and analyze why + a nice graph}
 \section{Discussion of Findings}
 \subsection{Practical Meaning of the Results}
 \subsection{Limitations}
