@@ -8,39 +8,32 @@ LD = qcc
 
 TARGET = -Vgcc_ntox86_64
 
-OQS_ROOT = C:/liboqs/build-qnx-x86_64/install
-OQS_INC = $(OQS_ROOT)/include
-OQS_LIBDIR= $(OQS_ROOT)/lib
-OQS_LIB= $(OQS_LIBDIR)/oqs.lib
+OQS_ROOT   = C:/liboqs/build-qnx-x86_64/install
+OQS_INC    = $(OQS_ROOT)/include
+OQS_LIBDIR = $(OQS_ROOT)/lib
+OQS_LIB    = $(OQS_LIBDIR)/oqs.lib
 
-CFLAGS += $(DEBUG) $(TARGET) -Wall -I$(OQS_INC)
+SRC_DIR = src
+BIN_DIR = bin
 
+CFLAGS  += $(DEBUG) $(TARGET) -Wall -I$(OQS_INC)
 LDFLAGS += $(DEBUG) $(TARGET)
 
-#libraries
+# libraries
 LIBS += $(OQS_LIB) -lcrypto
 
-BINS = hash sign_rsa validate_rsa keygen_mldsa sign_mldsa # validate_mldsa
+BINS = hash sign_rsa validate_rsa keygen_mldsa sign_mldsa validate_mldsa
+# BINS += validate_mldsa
 
-all: $(BINS)
+TARGETS = $(addprefix $(BIN_DIR)/,$(BINS))
 
-hash: hash.c
-	$(CC) $(CFLAGS) hash.c -o hash $(LDFLAGS) $(LIBS)
+all: $(TARGETS)
 
-sign_rsa: sign_rsa.c
-	$(CC) $(CFLAGS) sign_rsa.c -o sign_rsa $(LDFLAGS) $(LIBS)
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
 
-validate_rsa: validate_rsa.c
-	$(CC) $(CFLAGS) validate_rsa.c -o validate_rsa $(LDFLAGS) $(LIBS)
-	
-keygen_mldsa: keygen_mldsa.c
-	$(CC) $(CFLAGS) keygen_mldsa.c -o keygen_mldsa $(LDFLAGS) $(LIBS)
-
-sign_mldsa: sign_mldsa.c
-	$(CC) $(CFLAGS) sign_mldsa.c -o sign_mldsa $(LDFLAGS) $(LIBS)
-
-# validate_mldsa: validate_mldsa.c
-# $(CC) $(CFLAGS) validate_mldsa.c -o validate_mldsa $(LDFLAGS) $(LIBS)
+$(BIN_DIR)/%: $(SRC_DIR)/%.c | $(BIN_DIR)
+	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS) $(LIBS)
 
 clean:
-	rm -f *.o $(BINS)
+	rm -f $(BIN_DIR)/* *.o
