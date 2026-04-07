@@ -93,9 +93,6 @@
 	display_msg "Mounting boot partition"
 	waitfor /dev/hd0t12 10
 	mount -t dos /dev/hd0t12 /fs/boot
-	
-	display_msg "Initializing OTA metadata"
-	ksh /proc/boot/ota_init.sh
 
     #######################################################################
     ## USB OTG Host Controller driver
@@ -290,7 +287,6 @@ fi
 /usr/bin/vmstat=vmstat
 
 /usr/sbin/arp=arp
-/sbin/fdisk=fdisk
 /sbin/mkqnx6fs=mkqnx6fs
 /usr/sbin/pted=pted
 /usr/sbin/devctl=devctl
@@ -903,7 +899,7 @@ usb_start.sh = {
 	            PARSED_CPU=`echo "$LINE"|sed -n 's/.*CPU states: \\([0-9][0-9]*\\)\\.\\([0-9]\\)% user, \\([0-9][0-9]*\\)\\.\\([0-9]\\)% kernel.*/\\1\\2 \\3\\4/p'`
 	            if [ -n "$PARSED_CPU" ]; then
 	                set -- $PARSED_CPU
-	                CURRENT_CPU_TENTHS=$(( $1 + $2 ))
+	                CURRENT_CPU_TENTHS=$(($1+$2))
 	            else
 	                CURRENT_CPU_TENTHS=
 	            fi
@@ -912,13 +908,13 @@ usb_start.sh = {
 	            PARSED_MEM=`echo "$LINE" | sed -n 's/.*Memory: \\([0-9][0-9]*\\)M total, \\([0-9][0-9]*\\)M avail.*/\\1 \\2/p'`
 	            if [ -n "$PARSED_MEM" -a -n "$CURRENT_CPU_TENTHS" ]; then
 	                set -- $PARSED_MEM
-	                RAM_USED_MB=$(( $1 - $2 ))
+	                RAM_USED_MB=$(($1-$2))
 	
 	                echo "$CURRENT_CPU_TENTHS,$RAM_USED_MB" >> "$SAMPLE_FILE"
 	
-	                COUNT=$(( COUNT + 1 ))
-	                CPU_SUM_TENTHS=$(( CPU_SUM_TENTHS + CURRENT_CPU_TENTHS ))
-	                RAM_SUM_MB=$(( RAM_SUM_MB + RAM_USED_MB ))
+	                COUNT=$((COUNT+1))
+	                CPU_SUM_TENTHS=$((CPU_SUM_TENTHS + CURRENT_CPU_TENTHS))
+	                RAM_SUM_MB=$((RAM_SUM_MB + RAM_USED_MB))
 	
 	                if [ "$CURRENT_CPU_TENTHS" -gt "$CPU_MAX_TENTHS" ]; then
 	                    CPU_MAX_TENTHS=$CURRENT_CPU_TENTHS
@@ -935,21 +931,21 @@ usb_start.sh = {
 	done < "$RAW_TOP_FILE"
 	
 	if [ "$COUNT" -gt 0 ]; then
-	    CPU_AVG_HUND=$(( (CPU_SUM_TENTHS * 10)/ COUNT ))
-	    RAM_AVG_HUND=$(( (RAM_SUM_MB * 100)/COUNT ))
+	    CPU_AVG_HUND=$(((CPU_SUM_TENTHS * 10)/COUNT))
+	    RAM_AVG_HUND=$(((RAM_SUM_MB * 100)/COUNT))
 	else
 	    CPU_AVG_HUND=0
 	    RAM_AVG_HUND=0
 	fi
 	
-	CPU_MAX_WHOLE=$(( CPU_MAX_TENTHS/10 ))
-	CPU_MAX_FRAC=$(( CPU_MAX_TENTHS %10 ))
+	CPU_MAX_WHOLE=$((CPU_MAX_TENTHS/10))
+	CPU_MAX_FRAC=$((CPU_MAX_TENTHS % 10))
 	
-	CPU_AVG_WHOLE=$(( CPU_AVG_HUND/100 ))
-	CPU_AVG_FRAC=$(( CPU_AVG_HUND%100 ))
+	CPU_AVG_WHOLE=$((CPU_AVG_HUND/100))
+	CPU_AVG_FRAC=$((CPU_AVG_HUND % 100))
 	
-	RAM_AVG_WHOLE=$(( RAM_AVG_HUND/100 ))
-	RAM_AVG_FRAC=$(( RAM_AVG_HUND % 100 ))
+	RAM_AVG_WHOLE=$((RAM_AVG_HUND/100))
+	RAM_AVG_FRAC=$((RAM_AVG_HUND % 100))
 	
 	if [ "$CPU_AVG_FRAC" -lt 10 ]; then
 	    CPU_AVG_FRAC=0$CPU_AVG_FRAC
@@ -960,22 +956,22 @@ usb_start.sh = {
 	fi
 	
 	echo "Script version : $SCRIPT_VERSION" >> "$SUMMARY_FILE"
-	echo "OTA start_epoch: $START_TS" >> "$SUMMARY_FILE"
-	echo "OTA end_epoch: $END_TS" >> "$SUMMARY_FILE"
+	echo "OTA start_epoch : $START_TS" >> "$SUMMARY_FILE"
+	echo "OTA end_epoch : $END_TS" >> "$SUMMARY_FILE"
 	echo "OTA time: $ELAPSED seconds" >> "$SUMMARY_FILE"
-	echo "Max CPU used: $CPU_MAX_WHOLE.$CPU_MAX_FRAC %" >> "$SUMMARY_FILE"
-	echo "Avg CPU used: $CPU_AVG_WHOLE.$CPU_AVG_FRAC %" >> "$SUMMARY_FILE"
-	echo "Max RAM used: $RAM_MAX_MB MB" >> "$SUMMARY_FILE"
-	echo "Avg RAM used: $RAM_AVG_WHOLE.$RAM_AVG_FRAC MB" >> "$SUMMARY_FILE"
-	echo "Samples: $COUNT" >> "$SUMMARY_FILE"
-	echo "New image: $NEW_IFS" >> "$SUMMARY_FILE"
-	echo "Current image: $PRIMARY_IFS" >> "$SUMMARY_FILE"
-	echo "Backup image: $BACKUP_IFS" >> "$SUMMARY_FILE"
+	echo "Max CPU used : $CPU_MAX_WHOLE.$CPU_MAX_FRAC %" >> "$SUMMARY_FILE"
+	echo "Avg CPU used : $CPU_AVG_WHOLE.$CPU_AVG_FRAC %" >> "$SUMMARY_FILE"
+	echo "Max RAM used : $RAM_MAX_MB MB" >> "$SUMMARY_FILE"
+	echo "Avg RAM used : $RAM_AVG_WHOLE.$RAM_AVG_FRAC MB" >> "$SUMMARY_FILE"
+	echo "Samples : $COUNT" >> "$SUMMARY_FILE"
+	echo "New image : $NEW_IFS" >> "$SUMMARY_FILE"
+	echo "Current image : $PRIMARY_IFS" >> "$SUMMARY_FILE"
+	echo "Backup image : $BACKUP_IFS" >> "$SUMMARY_FILE"
 	echo "Raw log : $RAW_TOP_FILE" >> "$SUMMARY_FILE"
 	echo "OTA update complete"
-	echo "Summary file: $SUMMARY_FILE"
-	echo "Raw file: $RAW_TOP_FILE"
-	echo "Samples file: $SAMPLE_FILE"
+	echo "Summary file : $SUMMARY_FILE"
+	echo "Raw file : $RAW_TOP_FILE"
+	echo "Samples file : $SAMPLE_FILE"
 }
 
 [perms=0744] ota_update_ifs_rsa.sh = {
@@ -1036,7 +1032,7 @@ usb_start.sh = {
 	(
 	    while true
 	    do
-	        echo "===== SAMPLE `date +%s` =====" >> "$RAW_TOP_FILE"
+	        echo "SAMPLE `date +%s`" >> "$RAW_TOP_FILE"
 	        top -bd -D 1 -i 1 >> "$RAW_TOP_FILE" 2>&1 || true
 	        sleep 1
 	    done
@@ -1052,15 +1048,15 @@ usb_start.sh = {
 	    VERIFY_END_TS=`date +%s`
 	    VERIFY_TIME=$((VERIFY_END_TS - VERIFY_START_TS))
 	    ELAPSED=$((END_TS - START_TS))
-	    echo "Script version   : $SCRIPT_VERSION" >> "$SUMMARY_FILE"
-	    echo "Validation       : FAILED" >> "$SUMMARY_FILE"
-	    echo "OTA start_epoch  : $START_TS" >> "$SUMMARY_FILE"
-	    echo "OTA end_epoch    : $END_TS" >> "$SUMMARY_FILE"
-	    echo "Verify time      : $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
-	    echo "OTA time         : $ELAPSED seconds" >> "$SUMMARY_FILE"
-	    echo "New image        : $NEW_IFS" >> "$SUMMARY_FILE"
-	    echo "Signature file   : $SIG_FILE" >> "$SUMMARY_FILE"
-	    echo "Current image    : $PRIMARY_IFS" >> "$SUMMARY_FILE"
+	    echo "Script version: $SCRIPT_VERSION" >> "$SUMMARY_FILE"
+	    echo "Validation: FAILED" >> "$SUMMARY_FILE"
+	    echo "OTA start_epoch : $START_TS" >> "$SUMMARY_FILE"
+	    echo "OTA end_epoch : $END_TS" >> "$SUMMARY_FILE"
+	    echo "Verify time: $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
+	    echo "OTA time:$ELAPSED seconds" >> "$SUMMARY_FILE"
+	    echo "New image:$NEW_IFS" >> "$SUMMARY_FILE"
+	    echo "Signature file : $SIG_FILE" >> "$SUMMARY_FILE"
+	    echo "Current image : $PRIMARY_IFS" >> "$SUMMARY_FILE"
 	    echo "RSA validation failed update not installed"
 	    exit 1
 	fi
@@ -1133,48 +1129,48 @@ usb_start.sh = {
 	done < "$RAW_TOP_FILE"
 	
 	if [ "$COUNT" -gt 0 ]; then
-	    CPU_AVG_HUND=$(( (CPU_SUM_TENTHS * 10) / COUNT ))
-	    RAM_AVG_HUND=$(( (RAM_SUM_MB * 100) / COUNT ))
+	    CPU_AVG_HUND=$(( (CPU_SUM_TENTHS * 10)/COUNT ))
+	    RAM_AVG_HUND=$(( (RAM_SUM_MB * 100)/COUNT ))
 	else
 	    CPU_AVG_HUND=0
 	    RAM_AVG_HUND=0
 	fi
 	
 	CPU_MAX_WHOLE=$((CPU_MAX_TENTHS/10))
-	CPU_MAX_FRAC=$((CPU_MAX_TENTHS%10))
+	CPU_MAX_FRAC=$((CPU_MAX_TENTHS % 10))
 	
 	CPU_AVG_WHOLE=$((CPU_AVG_HUND/100))
-	CPU_AVG_FRAC=$((CPU_AVG_HUND%100))
+	CPU_AVG_FRAC=$((CPU_AVG_HUND % 100))
 	
 	RAM_AVG_WHOLE=$((RAM_AVG_HUND/100))
-	RAM_AVG_FRAC=$((RAM_AVG_HUND%100))
+	RAM_AVG_FRAC=$((RAM_AVG_HUND % 100))
 	
 	if [ "$CPU_AVG_FRAC" -lt 10 ]; then CPU_AVG_FRAC=0$CPU_AVG_FRAC; fi
 	if [ "$RAM_AVG_FRAC" -lt 10 ]; then RAM_AVG_FRAC=0$RAM_AVG_FRAC; fi
 	
-	echo "Script version: $SCRIPT_VERSION" >> "$SUMMARY_FILE"
-	echo "Validation: PASSED" >> "$SUMMARY_FILE"
-	echo "OTA start_epoch: $START_TS" >> "$SUMMARY_FILE"
-	echo "OTA end_epoch: $END_TS" >> "$SUMMARY_FILE"
-	echo "Verify time: $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
-	echo "Install time: $INSTALL_TIME seconds" >> "$SUMMARY_FILE"
-	echo "OTA time: $ELAPSED seconds" >> "$SUMMARY_FILE"
-	echo "Max CPU used:$CPU_MAX_WHOLE.$CPU_MAX_FRAC %" >> "$SUMMARY_FILE"
-	echo "Avg CPU used:$CPU_AVG_WHOLE.$CPU_AVG_FRAC %" >> "$SUMMARY_FILE"
-	echo "Max RAM used: $RAM_MAX_MB MB" >> "$SUMMARY_FILE"
-	echo "Avg RAM used:$RAM_AVG_WHOLE.$RAM_AVG_FRAC MB" >> "$SUMMARY_FILE"
-	echo "Samples: $COUNT" >> "$SUMMARY_FILE"
-	echo "New image :$NEW_IFS" >> "$SUMMARY_FILE"
-	echo "Signature file: $SIG_FILE" >> "$SUMMARY_FILE"
-	echo "Current image:$PRIMARY_IFS" >> "$SUMMARY_FILE"
-	echo "Backup image:$BACKUP_IFS" >> "$SUMMARY_FILE"
-	echo "Raw top log:$RAW_TOP_FILE" >> "$SUMMARY_FILE"
+	echo "Script version : $SCRIPT_VERSION" >> "$SUMMARY_FILE"
+	echo "Validation : PASSED" >> "$SUMMARY_FILE"
+	echo "OTA start_epoch : $START_TS" >> "$SUMMARY_FILE"
+	echo "OTA end_epoch : $END_TS" >> "$SUMMARY_FILE"
+	echo "Verify time : $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
+	echo "Install time : $INSTALL_TIME seconds" >> "$SUMMARY_FILE"
+	echo "OTA time : $ELAPSED seconds" >> "$SUMMARY_FILE"
+	echo "Max CPU used : $CPU_MAX_WHOLE.$CPU_MAX_FRAC %" >> "$SUMMARY_FILE"
+	echo "Avg CPU used : $CPU_AVG_WHOLE.$CPU_AVG_FRAC %" >> "$SUMMARY_FILE"
+	echo "Max RAM used : $RAM_MAX_MB MB" >> "$SUMMARY_FILE"
+	echo "Avg RAM used : $RAM_AVG_WHOLE.$RAM_AVG_FRAC MB" >> "$SUMMARY_FILE"
+	echo "Samples : $COUNT" >> "$SUMMARY_FILE"
+	echo "New image : $NEW_IFS" >> "$SUMMARY_FILE"
+	echo "Signature file : $SIG_FILE" >> "$SUMMARY_FILE"
+	echo "Current image : $PRIMARY_IFS" >> "$SUMMARY_FILE"
+	echo "Backup image : $BACKUP_IFS" >> "$SUMMARY_FILE"
+	echo "Raw top log : $RAW_TOP_FILE" >> "$SUMMARY_FILE"
 	
 	echo "RSA validation passed"
 	echo "OTA update complete"
-	echo "summary file:$SUMMARY_FILE"
-	echo "raw file:$RAW_TOP_FILE"
-	echo "samples file:$SAMPLE_FILE"
+	echo "summary file : $SUMMARY_FILE"
+	echo "raw file : $RAW_TOP_FILE"
+	echo "samples file : $SAMPLE_FILE"
 }
 
 
@@ -1237,7 +1233,7 @@ usb_start.sh = {
 	(
 	    while true
 	    do
-	        echo "===== SAMPLE `date +%s` =====" >> "$RAW_TOP_FILE"
+	        echo "SAMPLE `date +%s`" >> "$RAW_TOP_FILE"
 	        top -bd -D 1 -i 1 >> "$RAW_TOP_FILE" 2>&1 || true
 	        sleep 1
 	    done
@@ -1255,19 +1251,17 @@ usb_start.sh = {
 	    VERIFY_TIME=$((VERIFY_END_TS - VERIFY_START_TS))
 	    ELAPSED=$((END_TS - START_TS))
 	
-	    echo "========================================" > "$SUMMARY_FILE"
-	    echo "Script version   : $SCRIPT_VERSION" >> "$SUMMARY_FILE"
-	    echo "Validation       : FAILED" >> "$SUMMARY_FILE"
-	    echo "OTA start_epoch  : $START_TS" >> "$SUMMARY_FILE"
-	    echo "OTA end_epoch    : $END_TS" >> "$SUMMARY_FILE"
-	    echo "Verify time      : $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
-	    echo "OTA time         : $ELAPSED seconds" >> "$SUMMARY_FILE"
-	    echo "New image        : $NEW_IFS" >> "$SUMMARY_FILE"
-	    echo "Signature file   : $SIG_FILE" >> "$SUMMARY_FILE"
-	    echo "Current image    : $PRIMARY_IFS" >> "$SUMMARY_FILE"
-	    echo "========================================" >> "$SUMMARY_FILE"
-	
-	    echo "ML-DSA validation failed; update not installed"
+	    echo "Script version : $SCRIPT_VERSION" >> "$SUMMARY_FILE"
+	    echo "Validation : FAILED" >> "$SUMMARY_FILE"
+	    echo "OTA start_epoch : $START_TS" >> "$SUMMARY_FILE"
+	    echo "OTA end_epoch : $END_TS" >> "$SUMMARY_FILE"
+	    echo "Verify time : $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
+	    echo "OTA time : $ELAPSED seconds" >> "$SUMMARY_FILE"
+	    echo "New image : $NEW_IFS" >> "$SUMMARY_FILE"
+	    echo "Signature file : $SIG_FILE" >> "$SUMMARY_FILE"
+	    echo "Current image : $PRIMARY_IFS" >> "$SUMMARY_FILE"
+	   
+	    echo "ML-DSA validation failed update not installed"
 	    exit 1
 	fi
 	VERIFY_END_TS=`date +%s`
@@ -1291,7 +1285,7 @@ usb_start.sh = {
 	wait $SAMPLER_PID 2>/dev/null || true
 	
 	END_TS=`date +%s`
-	ELAPSED=$((END_TS - START_TS))
+	ELAPSED=$((END_TS-START_TS))
 	
 	CPU_SUM_TENTHS=0
 	CPU_MAX_TENTHS=0
@@ -1307,7 +1301,7 @@ usb_start.sh = {
 	            PARSED_CPU=`echo "$LINE" | sed -n 's/.*CPU states: \\([0-9][0-9]*\\)\\.\\([0-9]\\)% user, \\([0-9][0-9]*\\)\\.\\([0-9]\\)% kernel.*/\\1\\2 \\3\\4/p'`
 	            if [ -n "$PARSED_CPU" ]; then
 	                set -- $PARSED_CPU
-	                CURRENT_CPU_TENTHS=$(( $1 + $2 ))
+	                CURRENT_CPU_TENTHS=$(($1+$2))
 	            else
 	                CURRENT_CPU_TENTHS=
 	            fi
@@ -1339,48 +1333,48 @@ usb_start.sh = {
 	done < "$RAW_TOP_FILE"
 	
 	if [ "$COUNT" -gt 0 ]; then
-	    CPU_AVG_HUND=$(( (CPU_SUM_TENTHS * 10) / COUNT ))
-	    RAM_AVG_HUND=$(( (RAM_SUM_MB * 100) / COUNT ))
+	    CPU_AVG_HUND=$(((CPU_SUM_TENTHS * 10)/COUNT))
+	    RAM_AVG_HUND=$(((RAM_SUM_MB * 100)/COUNT))
 	else
 	    CPU_AVG_HUND=0
 	    RAM_AVG_HUND=0
 	fi
 	
-	CPU_MAX_WHOLE=$(( CPU_MAX_TENTHS / 10 ))
-	CPU_MAX_FRAC=$(( CPU_MAX_TENTHS % 10 ))
+	CPU_MAX_WHOLE=$((CPU_MAX_TENTHS/10))
+	CPU_MAX_FRAC=$((CPU_MAX_TENTHS % 10))
 	
-	CPU_AVG_WHOLE=$(( CPU_AVG_HUND / 100 ))
-	CPU_AVG_FRAC=$(( CPU_AVG_HUND % 100 ))
+	CPU_AVG_WHOLE=$((CPU_AVG_HUND/100))
+	CPU_AVG_FRAC=$((CPU_AVG_HUND % 100))
 	
-	RAM_AVG_WHOLE=$(( RAM_AVG_HUND / 100 ))
-	RAM_AVG_FRAC=$(( RAM_AVG_HUND % 100 ))
+	RAM_AVG_WHOLE=$((RAM_AVG_HUND/100))
+	RAM_AVG_FRAC=$((RAM_AVG_HUND % 100))
 	
 	if [ "$CPU_AVG_FRAC" -lt 10 ]; then CPU_AVG_FRAC=0$CPU_AVG_FRAC; fi
 	if [ "$RAM_AVG_FRAC" -lt 10 ]; then RAM_AVG_FRAC=0$RAM_AVG_FRAC; fi
 	
 	echo "Script version : $SCRIPT_VERSION" >> "$SUMMARY_FILE"
-	echo "Validation  :PASSED" >> "$SUMMARY_FILE"
+	echo "Validation : PASSED" >> "$SUMMARY_FILE"
 	echo "OTA start_epoch : $START_TS" >> "$SUMMARY_FILE"
-	echo "OTA end_epoch :$END_TS" >> "$SUMMARY_FILE"
-	echo "Verify time: $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
+	echo "OTA end_epoch : $END_TS" >> "$SUMMARY_FILE"
+	echo "Verify time : $VERIFY_TIME seconds" >> "$SUMMARY_FILE"
 	echo "Install time : $INSTALL_TIME seconds" >> "$SUMMARY_FILE"
-	echo "OTA time :$ELAPSED seconds" >> "$SUMMARY_FILE"
+	echo "OTA time : $ELAPSED seconds" >> "$SUMMARY_FILE"
 	echo "Max CPU used : $CPU_MAX_WHOLE.$CPU_MAX_FRAC %" >> "$SUMMARY_FILE"
 	echo "Avg CPU used : $CPU_AVG_WHOLE.$CPU_AVG_FRAC %" >> "$SUMMARY_FILE"
-	echo "Max RAM used: $RAM_MAX_MB MB" >> "$SUMMARY_FILE"
-	echo "Avg RAM used: $RAM_AVG_WHOLE.$RAM_AVG_FRAC MB" >> "$SUMMARY_FILE"
-	echo "Samples :$COUNT" >> "$SUMMARY_FILE"
-	echo "New image:$NEW_IFS">> "$SUMMARY_FILE"
-	echo "Signature file: $SIG_FILE">> "$SUMMARY_FILE"
-	echo "Current image: $PRIMARY_IFS" >> "$SUMMARY_FILE"
-	echo "Backup image: $BACKUP_IFS" >> "$SUMMARY_FILE"
-	echo "Raw log: $RAW_TOP_FILE">> "$SUMMARY_FILE"
+	echo "Max RAM used : $RAM_MAX_MB MB" >> "$SUMMARY_FILE"
+	echo "Avg RAM used : $RAM_AVG_WHOLE.$RAM_AVG_FRAC MB" >> "$SUMMARY_FILE"
+	echo "Samples : $COUNT" >> "$SUMMARY_FILE"
+	echo "New image : $NEW_IFS">> "$SUMMARY_FILE"
+	echo "Signature file : $SIG_FILE">> "$SUMMARY_FILE"
+	echo "Current image : $PRIMARY_IFS" >> "$SUMMARY_FILE"
+	echo "Backup image : $BACKUP_IFS" >> "$SUMMARY_FILE"
+	echo "Raw log : $RAW_TOP_FILE">> "$SUMMARY_FILE"
 	
 	echo "ML-DSA validation passed"
 	echo "OTA update complete"
-	echo "Summary file: $SUMMARY_FILE"
-	echo "Raw top file: $RAW_TOP_FILE"
-	echo "Samples file:$SAMPLE_FILE"
+	echo "Summary file : $SUMMARY_FILE"
+	echo "Raw top file : $RAW_TOP_FILE"
+	echo "Samples file : $SAMPLE_FILE"
 }
 
 ################################################################################################
